@@ -1,0 +1,15 @@
+Para correr este script hagan lo siguiente:
+
+Primero creen un proyecto en vivado
+
+Segundo carguen el IP que generaron
+
+Luego denle click en Create Block Design
+
+Y ahora sí, ejecuten del script desde la TCL terminal, para ejecutarlo usen source NameofFiLe.tcl
+
+Habiliten el Ethernet manualmente dentro del Zynq
+
+Click en Generate Output Product
+
+y cuando este listo denle click sobre Generate Bitstream

@@ -1,0 +1,11 @@
+To compile in a native machine, you need to follow the next steps:
+
+g++ -c  infoli.cpp -lm
+g++ -c  infoli_wrapped.cpp -DNative_IW
+g++ -c  infoli_tb.cpp -DNative_IT
+
+g++ -o FinalProgram infoli.o infoli_wrapped.o infoli_tb.o
+
+or use make on the terminal
+
+
