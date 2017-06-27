@@ -1,0 +1,256 @@
+
+body {
+    background: rgba(225, 225, 255, .2);
+    margin: 0;
+    margin-bottom: 40px;
+}
+/*-------------------------------Header Bar-----------------------*/
+header {
+    background: rgba(0, 0, 225, .4);
+    height: 60px;
+    width: 100%;
+    margin:auto;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgba(0,0,225,0.2);
+}
+ 
+header nav {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: block;
+    list-style: none
+}
+/*-------------------------------Header Bar-----------------------*/            
+
+/*-------------------------------Footer Bar-----------------------*/  
+footer {
+    background: rgba(0, 0, 225, .4);
+    height: 60px;
+    width: 100%;
+    position: bottom;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgba(0,0,225,0.2);
+}
+
+footer nav {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: block;
+    list-style: none;   
+}
+
+/*-------------------------------Footer Bar-----------------------*/ 
+
+/*---------------------------Logos & Images-----------------------*/ 
+.image{
+    height: 60px;
+    width: 15%;
+    display:inline-block;
+    float:left;
+}
+.imageFooterLeft{
+    height: 60px;
+    width: 15%;
+    display:inline-block;
+    float:left;
+}
+.imageFooterRight{
+    height: 60px;
+    width: 15%;
+    display:inline-block;
+    float:right;
+}
+/*---------------------------Logos & Images-----------------------*/ 
+
+/*---------------------------Side Menu----------------------------*/ 
+aside {
+    width: 20%;
+    height: 440px;
+    border-radius: 5px; 
+    border-style: solid;
+    border-color: rgba(5, 5, 5, 0.4);
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 5px 2px;
+    position:left;
+    float:left bottom;
+    box-sizing:border-box;
+}
+
+/*---------------------------Side Menu----------------------------*/ 
+
+/*---------------------------Containers---------------------------*/ 
+.flex-container {
+    width: 450px;
+    height: 340px;
+    padding-top: 50px;
+    padding-left: 20px;
+    border-radius: 5px; 
+    border-style: solid;
+    border-color: rgba(5, 5, 5, 0.4);
+    background-color: #f2f2f2;
+    margin: 5px 2px;
+    margin-left: 20px;
+    margin-right: 20px;
+    position:right;
+    float:right;
+}
+
+.flex-containergrahp {
+    width: 690px;
+    height: 450px;
+    padding-top: 5px;
+    padding-left: 0px;
+    border-radius: 5px; 
+    border-style: solid;
+    border-color: rgba(5, 5, 5, 0.4);
+    background-color: #f2f2f2;
+    margin: 5px 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    position:right;
+    float:right;
+}
+
+.flex-containergrahp .corra{
+    width: 23%;
+}
+.flex-container3D {
+    width: 780px;
+    height: 600px;
+    padding-top: 20px;
+    padding-left: 0px;
+    border-radius: 5px; 
+    border-style: solid;
+    border-color: rgba(5, 5, 5, 0.4);
+    background-color: #f2f2f2;
+    margin: 5px 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    position:right;
+    float:right;
+}
+
+/*---------------------------Containers---------------------------*/ 
+
+/*-----------------------Text input options-----------------------*/ 
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*-----------------------Text input options-----------------------*/ 
+
+/*-------------------------------Buttons---------------------------*/  
+.button {
+    background-color: rgba(0, 0, 255, 0.8);
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-size:1.25em;
+    float: left;
+    font-weight:600;
+    margin: 24px 4px;
+    border-radius: 8px;
+}
+
+
+.button:hover {
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+.button2 {
+    background-color: rgba(0, 0, 255, 0.8);
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-size:1.25em;
+    float: right;
+    font-weight:600;
+    margin: 24px 4px;
+    border-radius: 8px;
+}
+
+
+.button2:hover {
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+/*-------------------------------Button---------------------------*/
+
+/*-------------------------------Input-File-----------------------*/
+input[type=submit] {
+
+    background-color: rgba(0, 0, 255, 0.8);
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    float:left bottom;
+    display: inline-block;
+    font-size:1.25em;
+    font-weight:600;
+    margin: 25px 5px;
+    border-radius: 8px;
+}
+
+input[type=submit]:hover {
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+
+.inputfile{
+	width:0.1px;
+	height:0.1px;
+	overflow:hidden;
+	float: right;
+	z-index:-1;
+	display: inline-block;
+}
+
+
+.inputfile+label{
+	font-size:1.25em;
+	font-weight:600;
+	padding: 6px 20px;
+	margin: 25px 1px;
+	color:white;
+    	position: relative;
+    	float: left;
+	text-decoration: none;
+	border-radius: 8px;
+	background-color:rgba(0, 0, 255, 0.8);
+	display: inline-block;
+}
+
+.inputfile+label:hover{
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+/*-------------------------------Input-File-----------------------*/
+
+/*----------------------------3D graphic config-------------------*/
+
+a.hver {display:block; width:720px; height:550px; background:#fff url(../images/anim.png) no-repeat; overflow:hidden; cursor:default; margin:0 auto;}
+a.hver img {visibility:hidden;}
+a.hver:hover {background:0;}
+a.hver:hover img {visibility:visible; border:0;}
+
+/*----------------------------3D graphic config-------------------*/
