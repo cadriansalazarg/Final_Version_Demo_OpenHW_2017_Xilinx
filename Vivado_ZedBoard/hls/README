@@ -1,4 +1,6 @@
-To compile in a native machine, you need to follow the next steps:
+Instructions (Last revision: 6-28-2017)
+
+In order to compile the C++ reference design with its respective wrappers and testbench, execute these commands from the shell: 
 
 g++ -c  infoli.cpp -lm
 g++ -c  infoli_wrapped.cpp -DNative_IW
@@ -6,6 +8,7 @@ g++ -c  infoli_tb.cpp -DNative_IT
 
 g++ -o FinalProgram infoli.o infoli_wrapped.o infoli_tb.o
 
-or use make on the terminal
+
+A Makefile has been provided as well.
 
 

@@ -1,15 +1,15 @@
-Para correr este script hagan lo siguiente:
+Instructions (Last revision: 6-28-2017)
 
-Primero creen un proyecto en vivado
+In order to get the Zedbrain platform running on the Zedboard:
 
-Segundo carguen el IP que generaron
+1. Create a Vivado project
+2. Load the generated IP with the accelerated hardware to be connected
+3. Click in Create Block Design
+4. Run the vivado.tcl script (source vivado.tcl)
+5. Inside Vivado, you have to manually enable Ethernet on the Zynq
+6. Click on Generate Output Product
+7. Click on Generate Bitstream
+8. Bitstream may be downloaded to the Zedboard
 
-Luego denle click en Create Block Design
 
-Y ahora sí, ejecuten del script desde la TCL terminal, para ejecutarlo usen source NameofFiLe.tcl
 
-Habiliten el Ethernet manualmente dentro del Zynq
-
-Click en Generate Output Product
-
-y cuando este listo denle click sobre Generate Bitstream
