@@ -1,0 +1,266 @@
+import socket
+import sys                          #libraries
+from threading import Thread
+import struct
+import sched, time
+############ Definitions of data structures for data received from client #########################################
+
+
+class data_transfer(Thread):
+	def __init__(self,ip,port,tx,state,n_size): 
+		Thread.__init__(self)
+		self.Ip = ip
+		self.port = port 
+		self.tx = tx
+		self.state = state 
+		self.n_size = n_size
+	def run(self): 
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 1024)
+		# Connect the socket to the port where the server is listening
+		server_address = (self.Ip, 7)
+		sock.connect(server_address)
+		try:
+			sock.sendall(self.tx)
+			self.rx = ""
+			finished = False
+			if self.state==1:
+				totalsent=0
+				MSGLEN= 4*self.n_size*2      #Received message lenght= 2 vdend & 4 float.
+				while totalsent < MSGLEN:
+					
+            				self.rx = self.rx + sock.recv(1024)
+            				totalsent= len(self.rx)
+              		else:
+				self.rx = sock.recv(150)			
+			
+						
+		finally:
+			sock.close()
+
+
+
+class FPGA_device: #check
+	ID_count = 0
+	def __init__(self, ip, port, n_size):
+		self.Ip = ip
+		self.port = port
+		self.fpga_n_size = n_size
+		self.ID = self.ID_count
+		FPGA_device.ID_count += 1 
+
+class simCell: #Structure for one cell #check
+	dend_V_dend=0
+	dend_Calcium_r=0
+	dend_Potassium_s =0
+	dend_Hcurrent_q	=0
+	dend_Ca2Plus =0
+	dend_I_CaH =0
+	soma_g_CaL =0
+	soma_V_soma =0
+	soma_Sodium_m =0
+	soma_Sodium_h =0
+	soma_Potassium_n =0
+	soma_Potassium_p =0
+	soma_Potassium_x_s =0
+	soma_Calcium_k	=0
+	soma_Calcium_l	=0
+	axon_V_axon =0
+	axon_Sodium_m_a	=0
+	axon_Sodium_h_a	=0
+	axon_Potassium_x_a =0
+	def __init__(self, simSteps): #stimulus Iapp
+		self.iapp = [0]*simSteps
+	
+class simNetwork: #this class initialize the network from received file
+
+	network = []
+	vdend = []
+	cellout = []
+	stepCount = 0
+	accum = 0
+	MAX = 0
+	MIN = 1000
+	def __init__(self, N_size, simSteps): #N_size is the simCell quantity to append in the list #check
+		self.steps = simSteps		
+		for n in range(N_size):
+			self.size = N_size
+			self.network.append(simCell(simSteps))
+		for n in range(simSteps):
+			self.cellout.append([0]*N_size)
+	def set_network(self, source): #source is the file location (read only) #check
+		archivo = open(source,"r")
+		lines=archivo.readlines()
+		for i in range(self.size):
+			self.network[i].dend_V_dend=        float(lines[0].split('\t')[i+1])
+			self.vdend.append(self.network[i].dend_V_dend)
+			self.network[i].dend_Calcium_r=     float(lines[1].split('\t')[i+1])
+			self.network[i].dend_Potassium_s =  float(lines[2].split('\t')[i+1])
+			self.network[i].dend_Hcurrent_q	=   float(lines[3].split('\t')[i+1])
+			self.network[i].dend_Ca2Plus =      float(lines[4].split('\t')[i+1])
+			self.network[i].dend_I_CaH =        float(lines[5].split('\t')[i+1])
+			self.network[i].soma_g_CaL =        float(lines[6].split('\t')[i+1])
+			self.network[i].soma_V_soma =       float(lines[7].split('\t')[i+1])
+			self.network[i].soma_Sodium_m =     float(lines[8].split('\t')[i+1])
+			self.network[i].soma_Sodium_h =     float(lines[9].split('\t')[i+1])
+			self.network[i].soma_Potassium_n =  float(lines[10].split('\t')[i+1])
+			self.network[i].soma_Potassium_p =  float(lines[11].split('\t')[i+1])
+			self.network[i].soma_Potassium_x_s =float(lines[12].split('\t')[i+1])
+			self.network[i].soma_Calcium_k	=  float(lines[13].split('\t')[i+1])
+			self.network[i].soma_Calcium_l	=  float(lines[14].split('\t')[i+1])
+			self.network[i].axon_V_axon =       float(lines[15].split('\t')[i+1])
+			self.network[i].axon_Sodium_m_a=    float(lines[16].split('\t')[i+1])
+			self.network[i].axon_Sodium_h_a=    float(lines[17].split('\t')[i+1])
+			self.network[i].axon_Potassium_x_a= float(lines[18].split('\t')[i+1])
+		
+		for i in range(self.steps):
+			for j in range(self.size):
+				self.network[j].iapp[i] = float(lines[19+i].split('\t')[j+1])
+
+		archivo.close()
+	def hw_init(self, fpga_devices): # setup the hardware with the initialization parameters
+		print "hw_init"		
+		count_simCell = 0
+		tx_list = []
+		state=0
+		
+		for device in fpga_devices: #generates messages for each device
+			tx=""	
+			packer = struct.Struct('f'*19)
+			cell_count=0
+			for i in range(count_simCell, device.fpga_n_size):
+				tx += packer.pack(self.network[i].dend_V_dend, self.network[i].dend_Calcium_r,self.network[i].dend_Potassium_s,self.network[i].dend_Hcurrent_q,self.network[i].dend_Ca2Plus, self.network[i].dend_I_CaH, self.network[i].soma_g_CaL, self.network[i].soma_V_soma, self.network[i].soma_Sodium_m, self.network[i].soma_Sodium_h, self.network[i].soma_Potassium_n, self.network[i].soma_Potassium_p, self.network[i].soma_Potassium_x_s, self.network[i].soma_Calcium_k, self.network[i].soma_Calcium_l, self.network[i].axon_V_axon, self.network[i].axon_Sodium_m_a, self.network[i].axon_Sodium_h_a, self.network[i].axon_Potassium_x_a) #package of 19 float data of the init state
+
+			
+			tx_list.append(tx)
+			
+
+		count_simCell += device.fpga_n_size
+		threads = []
+		
+
+		for device in fpga_devices: #build threads#
+			new_thread = data_transfer(device.Ip,device.port,tx_list[device.ID],state,device.fpga_n_size)
+			new_thread.start()
+			threads.append(new_thread)
+			
+
+		for t in threads: #join(threads)	
+			t.join()
+		
+		
+
+	def gen_step(self, fpga_devices,finish) :
+		#print 'gen_step'
+		vdend = []		
+		tx_list = []
+		count_simCell = 0
+		state=1
+		start = time.time()
+		for device in fpga_devices: #generates messages for each device
+			tx=""
+			packer = struct.Struct('f')		
+			for i in range(count_simCell,count_simCell+device.fpga_n_size):
+				tx += packer.pack(self.network[i].iapp[self.stepCount])
+			if(self.size > device.fpga_n_size):
+				
+		
+				packer = struct.Struct('f')
+				vdend = self.vdend[:count_simCell]+self.vdend[count_simCell+device.fpga_n_size:]
+				
+				for v in vdend :
+					tx += packer.pack(v)
+			
+
+			if finish==True:
+				tx += "\xFF\xFF\xFF\xFF" #stop condition= the last iapp have this condition
+			else:				
+				tx += "\x00\x00\xFF\xFF" #continue condition= the last iapp doesn't have this condition
+			
+			tx_list.append(tx)
+			count_simCell += device.fpga_n_size
+		start = time.time()
+		threads = []
+		for device in fpga_devices: #build threads
+			new_thread=data_transfer(device.Ip,device.port,tx_list[device.ID],state,device.fpga_n_size)
+			new_thread.start()
+			threads.append(new_thread)
+		#print "join"	
+		for t in threads: #join(threads)	
+			t.join()
+		
+		end= time.time()
+		ref=end-start
+		
+		self.accum+=ref
+		if self.MAX < ref:
+			self.MAX=ref
+		if self.MIN>ref:
+			self.MIN=ref
+
+		self.vdend = []
+		cellout_fpga = []
+		vdend_fpga = []
+		vdend_cont=0
+		for device in fpga_devices:
+			packer = struct.Struct('f'*device.fpga_n_size)
+			cellout_fpga = packer.unpack(threads[device.ID].rx[0:4*device.fpga_n_size])
+			vdend_fpga = packer.unpack(threads[device.ID].rx[4*device.fpga_n_size:])
+			for a in range(len(cellout_fpga)):
+				self.cellout[simNetwork.stepCount][a+(device.ID*device.fpga_n_size)] =cellout_fpga[a]
+				self.vdend.append(vdend_fpga[a])
+			
+			
+		simNetwork.stepCount += 1
+		#print "gen_step", simNetwork.stepCount
+		 		
+
+
+	def print_file (self, file_name): #write file from data
+		print "print_file"
+		f = open(file_name,"w")
+		buff = ""		
+		for s in range(simNetwork.stepCount):		
+			for n in range(self.size):
+				buff += str(self.cellout[s][n]) + '\t'
+			buff += '\n'
+		f.write(buff)
+		f.close()
+		PROM=self.accum/simNetwork.stepCount
+		print "PROMEDIO" , PROM , "MAX", self.MAX , "MIN", self.MIN
+		
+#######################################################################################################
+######################################## MAIN SECTION #################################################
+
+
+N=int(sys.argv[1])            #It take arguments, the first one is for Nsize, the second one it's number of steps 
+STEP=int(sys.argv[2])	      #and third one, number of devices connected.
+FPGA=int(sys.argv[3])
+
+			      #It associate devices connected with an IP, port and N size, the global N size is divided for each device.
+if FPGA==4:
+	fpga_devices = [FPGA_device('192.168.1.10', 7,N/4), FPGA_device('192.168.1.11', 7,N/4), FPGA_device('192.168.1.12', 7,N/4), FPGA_device('192.168.1.13', 7,N/4)]
+elif FPGA==3:
+	fpga_devices = [FPGA_device('192.168.1.10', 7,N/3), FPGA_device('192.168.1.11', 7,N/3), FPGA_device('192.168.1.12', 7,N/3)]
+elif FPGA==2:
+	fpga_devices = [FPGA_device('192.168.1.10', 7,N/2), FPGA_device('192.168.1.11', 7,N/2)]
+else:
+	fpga_devices = [FPGA_device('192.168.1.11', 7,N)]
+
+
+
+NETWORK = simNetwork(N,STEP)
+NETWORK.set_network("file/data.txt")
+
+NETWORK.hw_init(fpga_devices)
+
+for s in range(STEP):
+	if s==(STEP-1):
+		NETWORK.gen_step(fpga_devices,True)
+	else:	
+		NETWORK.gen_step(fpga_devices,False)
+
+
+NETWORK.print_file("dataG.txt")
+
+
