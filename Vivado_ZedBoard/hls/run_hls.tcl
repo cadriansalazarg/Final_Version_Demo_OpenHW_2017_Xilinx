@@ -1,7 +1,7 @@
 
 #Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
-#Copyright <YEAR> <COPYRIGHT HOLDER>
+#Copyright 2017 Erasmus Brain Project
 
 #Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -15,10 +15,20 @@
 
 
 
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/run_hls.tcl: Vivado hls script
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a script to execute vivado HLS. It was tested in Vivado HLS 2016.4
+#* vivado_hls -f run_hls.tcl
+#*
+#******************************************************************************/
+
 
 
 # WRAPPED AXI4-STREAM MATRIX MULTIPLIER HLS PROJECT
-open_project hls_wrapped_mmult_prj
+open_project hls_wrapped_computenetwork_prj
 set_top HLS_accel
 
 
@@ -35,6 +45,17 @@ csim_design -clean
 csim_design 
 csynth_design
 #the next line must be uncommented to do the cosimulation
-#cosim_design  
+cosim_design  
 export_design -format ip_catalog
 close_project
+
+
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/run_hls.tcl: Vivado hls script
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a script to execute vivado HLS. It was tested in Vivado HLS 2016.4
+#* vivado_hls -f run_hls.tcl
+#*
+#******************************************************************************/

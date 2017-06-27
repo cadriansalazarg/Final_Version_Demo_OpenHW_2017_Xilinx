@@ -16,6 +16,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 */
 
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli.h
+#*
+#* Written by: George Smaragdos.
+#* Modified by : Carlos Salazar-García, 2017
+#* This header file is used to change  parameters of the network
+#* 
+#*
+#******************************************************************************/
+
+
 #ifndef INFOLI
 #define INFOLI
 
@@ -193,3 +205,15 @@ inline mod_prec min(mod_prec a, mod_prec b);
 
 
 #endif
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli.h
+#*
+#* Written by: George Smaragdos.
+#* Modified by : Carlos Salazar-García, 2017
+#* This header file is used to change  parameters of the network
+#* 
+#*
+#******************************************************************************/
+

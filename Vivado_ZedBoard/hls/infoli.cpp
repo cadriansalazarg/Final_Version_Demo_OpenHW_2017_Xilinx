@@ -16,6 +16,17 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 */
 
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli.cpp
+#*
+#* Written by: George Smaragdos.
+#* Modified by : Carlos Salazar-García, 2017
+#* This source code is the kernel of the algorithm
+#* 
+#*
+#******************************************************************************/
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -611,3 +622,14 @@ inline mod_prec min(mod_prec a, mod_prec b){
 }
 
 
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli.cpp
+#*
+#* Written by: George Smaragdos.
+#* Modified by : Carlos Salazar-García, 2017
+#* This source code is the kernel of the algorithm
+#* 
+#*
+#******************************************************************************/

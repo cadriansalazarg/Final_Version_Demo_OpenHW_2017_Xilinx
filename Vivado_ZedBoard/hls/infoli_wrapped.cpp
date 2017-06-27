@@ -16,6 +16,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 */
 
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli_wrapped.c
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a wrapped of the function infoli.c
+#* 
+#*
+#******************************************************************************/
+
 //#include "infoli.h"
 #include "infoli_wrapped.h"
 
@@ -59,6 +71,15 @@ void standalone_ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec ne
 
 
 
-
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli_wrapped.c
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a wrapped of the function infoli.c
+#* 
+#*
+#******************************************************************************/
 
 

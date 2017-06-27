@@ -14,7 +14,17 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-*/
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli_wrapped.h 
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a wrapped of the function infoli.c
+#* 
+#*
+#******************************************************************************/
+
+
 
 #ifndef INFOLI_WRAPPED
 #define INFOLI_WRAPPED
@@ -39,6 +49,19 @@ void standalone_ComputeNetwork(cellState*, mod_prec*,  mod_prec* , int , int ,mo
 #endif
 
 #endif
+
+
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/infoli_wrapped.h 
+#*
+#* Written by: Carlos Salazar-García, 2017.
+#*
+#* This code is a wrapped of the function infoli.c
+#* 
+#*
+#******************************************************************************/ 
 
 
 
