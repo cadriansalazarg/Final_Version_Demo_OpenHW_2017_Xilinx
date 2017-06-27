@@ -14,8 +14,8 @@ Server/          ------------ Webserver interface to the Zedbrain platform
 
 ## Collaborators
 
-PhD Students: Georgios Smargados, Carlos Salazar-Garcia
+PhD Students: Georgios Smaragdos, Carlos Salazar-Garcia
 
-Undergraduate assistants: Kaleb Alfaro-Badilla, Daniel Zamora, Marco Ulate
+Undergraduate assistants: Kaleb Alfaro-Badilla, Daniel Zamora-Umaña, Marco Acuña-Vargas
 
 Advisers: Christos Strydis (Erasmus MC), Alfonso Chacon-Rodriguez (TEC)
