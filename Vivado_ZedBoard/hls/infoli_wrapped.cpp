@@ -1,7 +1,7 @@
 /*
 Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
-Copyright <YEAR> <COPYRIGHT HOLDER>
+Copyright 2017 Erasmus Brain Project
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -47,7 +47,7 @@ void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_
 	#pragma HLS INTERFACE s_axilite port=Mux_Factor bundle=bus
 	#pragma HLS INTERFACE s_axilite port=Connectivity_Matrix bundle=bus
 	#pragma HLS INTERFACE axis      port=OUTPUT_STREAM
-	#pragma HLS INTERFACE s_axilite port=Test bundle=bus   // Erase Only for test
+	#pragma HLS INTERFACE s_axilite port=Test bundle=bus  
 	#pragma HLS INTERFACE s_axilite port=return     bundle=CONTROL_BUS
 	
 	

@@ -1,7 +1,7 @@
 /*
 Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
-Copyright <YEAR> <COPYRIGHT HOLDER>
+Copyright 2017 Erasmus Brain Project
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -15,6 +15,17 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 */
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/dma_interface.h
+#*
+#* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf
+#* Modified by : Carlos Salazar-García, 2017
+#* This source code is the kernel of the algorithm
+#* 
+#*
+#******************************************************************************/
 
 #ifndef DMA_INTERFACE
 #define DMA_INTERFACE
@@ -35,3 +46,14 @@ int test_matrix_mult(void);
 
 
 #endif
+
+/*
+#/******************************************************************************
+#* Vivado_ZedBoard/hls/dma_interface.h
+#*
+#* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf
+#* Modified by : Carlos Salazar-García, 2017
+#* This source code is the kernel of the algorithm
+#* 
+#*
+#******************************************************************************/
