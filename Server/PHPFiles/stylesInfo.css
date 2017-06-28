@@ -1,7 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+/**************************************************************************************************
+#FILE NAME : stylesInfo.css
+#Written by: Daniel Zamora Umaña.
+#This code contains the styles used in the website information page.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#HTML5
+**************************************************************************************************/
 
 html {
   min-height: 100%;
@@ -13,7 +17,7 @@ body {
     margin: 0;
     margin-bottom: 10px;
 }
-
+/*-------------------------------Header Bar-----------------------*/
 header {
     background: rgba(0, 0, 225, .4);
     height: 60px;
@@ -40,6 +44,9 @@ header nav ul li {
     display: block;
 }
 
+/*-------------------------------Header Bar-----------------------*/
+
+/*-------------------------------Footer Bar-----------------------*/ 
 footer {
     background: rgba(0, 0, 225, .4);
     height: 60px;
@@ -68,7 +75,9 @@ footer nav ul {
 footer nav ul li {
     display: block;
 }
+/*-------------------------------Footer Bar-----------------------*/ 
 
+/*---------------------------Logos & Images-----------------------*/ 
 .image{
     height: 60px;
     width: 99%;
@@ -85,7 +94,9 @@ footer nav ul li {
 .main {
     height: 700px;
 }
+/*---------------------------Logos & Images-----------------------*/ 
 
+/*-------------------------------Buttons---------------------------*/  
 .button {
     background-color: rgba(0, 0, 255, 0.8);
     border: none;
@@ -102,5 +113,13 @@ footer nav ul li {
     border-radius: 8px;
 }
 
+/*-------------------------------Buttons---------------------------*/  
 
-
+/**************************************************************************************************
+#FILE NAME : stylesInfo.css
+#Written by: Daniel Zamora Umaña.
+#This code contains the styles used in the website information page.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#HTML5
+**************************************************************************************************/

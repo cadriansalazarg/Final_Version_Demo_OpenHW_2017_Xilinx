@@ -1,7 +1,7 @@
 /*
 Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
 
-Copyright <YEAR> <COPYRIGHT HOLDER>
+Copyright 2017 Erasmus Brain Project
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -57,7 +57,7 @@ void ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[N
 		//k++;		
 	}
 	
-	//printf("El valor de la primera neurona %f\t, la segunda neurona es %f\n", neighVdend0[2], neighVdend0[3]);
+	
 
 	
 	

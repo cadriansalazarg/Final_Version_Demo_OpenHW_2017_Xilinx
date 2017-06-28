@@ -32,7 +32,7 @@ open_project hls_wrapped_computenetwork_prj
 set_top HLS_accel
 
 
-#open_project Borrar
+
 add_files infoli.cpp  
 add_files dma_interface.cpp  
 add_files infoli_wrapped.cpp  
