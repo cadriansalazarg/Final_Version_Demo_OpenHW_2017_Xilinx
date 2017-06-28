@@ -21,7 +21,7 @@
 #Libraries
 #------------------------------o----------------------------#
 import matplotlib
-matplotlib.use('Agg') #compatibility with Apache
+matplotlib.use('Agg') #solves compatibility with Apache
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import colors
