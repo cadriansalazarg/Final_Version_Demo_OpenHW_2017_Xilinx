@@ -33,17 +33,16 @@ import os
 
 #os.system('rm *.png')
 
-nsize = int(sys.argv[1])
+nsize = int(sys.argv[1]) #receives nsize from webpage
 
-fig = plt.figure(figsize=(8,6))
+fig = plt.figure(figsize=(8,6)) 
 ax = fig.add_subplot(111,projection='3d')
 
-
-
-x=[]
+#list of dots
+x=[] 
 y=[]
 z=[]
-if(nsize==100):
+if(nsize==100): 
 	x=list(range(0,5))*5*4
 	for i in range(0,5):
 		y+=[i]*5
@@ -64,19 +63,22 @@ elif(nsize==1000):
 	y=y*10
 	for i in range(0,10):
 		z+=[i]*10*10
-	
+#lists to array
 xs = np.array(x)
 ys = np.array(y)
 zs = np.array(z)
+#Values of voltages are mapped to colors
 colmap = cm.ScalarMappable(norm=colors.Normalize(vmin=-80.,vmax=-50.),cmap=cm.gnuplot)
 colmap.set_array(np.array([-80,-70]))
 cb = fig.colorbar(colmap)
 cb.set_label('Axon output(V)')
-img_num=0
+
+img_num=0 #image enumarations
+
 with open("dataG.txt") as fp:
 	for i, line in enumerate(fp):
 		
-		if(i%500==0):			
+		if(i%500==0): #for each 500 steps save an image
 			plt.cla()
 			ax.set_title('Volumetric plot of axon responses\nfor neuron population')
 			ax.text(10, 0, 0, "Step: "+str(i)+' out of '+'50000')
@@ -90,5 +92,7 @@ with open("dataG.txt") as fp:
 			ax.view_init(elev=15., azim=9.)
 			savefig(str(img_num)+'.png')
 			img_num+=1
+#from images created, build .gif animation
 os.system('convert -delay 20 -loop 0 *.png images/anim.gif')
+#delete all images
 os.system('rm *.png')
