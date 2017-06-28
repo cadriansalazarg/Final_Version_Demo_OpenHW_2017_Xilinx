@@ -11,9 +11,9 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
 ## Directory structure
-Vivado_ZedBoard/ ------------ Project files required to program the Zedboard. Vivado 2016.4
+std_stimulus_gen.py/ ------------ This script generate and standard initialization for the network with a fixed Nsize and number of steps
 
-Server/          ------------ Webserver interface to the Zedbrain platform
+data1.txt/          ------------ Reference initialization to replicate
 
 ## Collaborators
 
