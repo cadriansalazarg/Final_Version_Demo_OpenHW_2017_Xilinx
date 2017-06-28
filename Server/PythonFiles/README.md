@@ -11,13 +11,13 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
 ## Directory structure
-ethernet.py / ------------ 
+ethernet.py / ------------ This script performs the communication between a Web Server and peripheral devices.
 
-Axongraphic.py/ ------------ 
+Axongraphic.py/ ------------ This script creates a 2D graph that represents the axonal voltage output from a specific neuron in the network.
 
-Rastergraphic.py/ ------------ 
+Rastergraphic.py/ ------------ This script creates a 2D graph that represents the axonal voltage output from the network.
 
-Volumetricgraphic.py/ ------------ 
+Volumetricgraphic.py/ ------------ This script creates a 3D scatter graph that represents the axonal voltage output from the network.
 
 
 ## Collaborators

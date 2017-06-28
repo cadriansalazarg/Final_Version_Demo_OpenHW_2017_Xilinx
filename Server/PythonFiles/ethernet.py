@@ -1,10 +1,11 @@
 #******************************************************************************************************************
 #FILE NAME = ethernet.py
-#Written by: Kaleb Alfaro Badilla & Daniel Zamora Umaña.
+#Written by: Kaleb Alfaro_Badilla & Daniel Zamora_Umaña.
 #This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
 #CREATED = 2016
 #LAST ACTUALIZATION = 2017
 #Python 2.7
+#Copyright 2017 Erasmus Brain Project
 #******************************************************************************************************************
 
 #Libraries
@@ -289,10 +290,11 @@ NETWORK.print_file("dataG.txt")		#Save a file with the output.
 
 #******************************************************************************************************************
 #FILE NAME = ethernet.py
-#Written by: Kaleb Alfaro Badilla & Daniel Zamora Umaña.
+#Written by: KalebAlfaro_Badilla & Daniel Zamora_Umaña.
 #This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
 #CREATED = 2016
 #LAST ACTUALIZATION = 2017
 #Python 2.7
+#Copyright 2017 Erasmus Brain Project
 #******************************************************************************************************************
 

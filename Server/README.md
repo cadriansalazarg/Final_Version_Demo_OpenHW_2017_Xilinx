@@ -27,8 +27,9 @@ To build the website, several steps have to be executed:
 7. Restart Apache to make these changes take effect.
 8. Move php files and python files to the directory **public_html**.
 9. Create extra directory called css and move the CSS files in there.
-10. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size** **upload_max_filesize** and **memory_limit**.
+10. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
 
+To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7 and PHP5.
 
 ## Collaborators
 
