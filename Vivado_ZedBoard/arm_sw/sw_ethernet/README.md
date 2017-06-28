@@ -12,16 +12,18 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 
 
 ## How to compile
-- From Vivado project, export hardware & bitstream to project.sdk directory
-- Create Xilinx SDK project from example "lwip echo server"
-- Replace the following files:
+1. From Vivado project, export hardware & bitstream to project.sdk directory
+2. Create Xilinx SDK project from example "lwip echo server"
+3. Replace the following files:
 	- echo.c
 	- main.c
-- Add the following files:
+4. Add the following files:
 	- dma_main.c
 	- lib_xmmult_hw.c
 	- lib_xmmult_hw.h
-- Modify 
+5. Modify BSP by changing the parameter of lwIP
+	- "tcp_send_buff" to 32MB
+6. Build project
 
 ## Directory structure
 In order to loaded the SDK software
