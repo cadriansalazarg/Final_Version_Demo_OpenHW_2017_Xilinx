@@ -5,7 +5,7 @@
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
 #PHP 5 HTML5
-#Copyright 2017 Erasmus Brain Project
+
 -------------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -198,7 +198,7 @@ else if(number==2){alert("Select a File with the stimulus.");}
 		if (empty($Zedboards)) {
 			$Zedboards=1;}
 		$command = 'python ethernet.py ' . $Nsize . ' ' . $step . ' ' . $Zedboards;
-		#$output = passthru($command);
+		$output = passthru($command);
 		echo '<script> alert("Simulation Complete!"); </script>';
 
 		}
@@ -229,5 +229,4 @@ else if(number==2){alert("Select a File with the stimulus.");}
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
 #PHP 5 HTML 5
-#Copyright 2017 Erasmus Brain Project
 -------------------------------------------------------------------------------------------------->
