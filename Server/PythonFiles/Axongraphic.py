@@ -10,7 +10,7 @@
 
 #******************************************************************************************************************
 #FILE NAME = Axongraphic.py
-#Written by: Daniel Zamora-Umaña.
+#Written by: Daniel Zamora-Umana.
 
 #This script creates a 2D graphic that represents the axonal voltage output from a specific neuron in the network.
 #CREATED = 2016
@@ -74,7 +74,7 @@ plt.savefig('images/myfig.png')			#this command saves a png figure to show it in
 
 #******************************************************************************************************************
 #FILE NAME = Axongraphic.py
-#Written by: Daniel Zamora-Umaña.
+#Written by: Daniel Zamora-Umana.
 
 #This script creates a 2D graphic that represents the axonal voltage output from a specific neuron in the network.
 #CREATED = 2016
