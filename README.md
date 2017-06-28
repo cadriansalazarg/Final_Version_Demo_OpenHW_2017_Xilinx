@@ -25,4 +25,5 @@ Advisers: Christos Strydis (Erasmus MC), Alfonso Chacon-Rodriguez (TEC)
 
 ## License
 Copyright 2017 Erasmus Brain project
+
 BSD-3-Clause
