@@ -1,10 +1,11 @@
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : index.php
-#Written by: Daniel Zamora Umaña.
+#Written by: Daniel Zamora_Umaña.
 #This code is a script to create a website. It was tested and run with Apache server.
 #CREATED : 2016
-#LAST ACTUALIZATION : 2017
+#LAST ACTUALIZATION : 27/06/2017
 #PHP 5 HTML5
+#Copyright 2017 Erasmus Brain Project
 -------------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -223,9 +224,10 @@ else if(number==2){alert("Select a File with the stimulus.");}
 
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : index.php
-#Written by: Daniel Zamora Umaña.
+#Written by: Daniel Zamora_Umaña.
 #This code is a script to create a website. It was tested and run with Apache server.
 #CREATED : 2016
-#LAST ACTUALIZATION : 2017
+#LAST ACTUALIZATION : 27/06/2017
 #PHP 5 HTML 5
+#Copyright 2017 Erasmus Brain Project
 -------------------------------------------------------------------------------------------------->
