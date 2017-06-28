@@ -17,7 +17,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli.cpp
 #*
 #* Written by: George Smaragdos.
@@ -26,7 +26,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #* 
 #*
 #******************************************************************************/
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,12 +37,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 
-void ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[NUM_NEIGH_CELLS], mod_prec iAppin[MAX_TIME_MUX], int N_Size, int Mux_Factor, mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], mod_prec cellOut[MAX_TIME_MUX], mod_prec neighVdendOut[MAX_TIME_MUX], mod_prec Test[TESTERNUMBER]){
+void ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[MAX_NEIGH_SIZE], mod_prec iAppin[MAX_TIME_MUX], int N_Size, int Mux_Factor, mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], mod_prec cellOut[MAX_TIME_MUX], mod_prec neighVdendOut[MAX_TIME_MUX], mod_prec Test[TESTERNUMBER]){
 	
 	int j;  
 
 	//returnState AxonOut;
-	mod_prec neighVdend0[MAX_TIME_MUX+NUM_NEIGH_CELLS];  // Changing MAX_N_SIZE by TIME_MUX_FACTOR
+	mod_prec neighVdend0[MAX_TIME_MUX+MAX_NEIGH_SIZE];  // Changing MAX_N_SIZE by TIME_MUX_FACTOR
 	cellState new_state0[MAX_TIME_MUX]; 		// Changing MAX_TIME_MUX by TIME_MUX_FACTOR
 
 	//Neighboring inputs preparation
@@ -57,7 +56,7 @@ void ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[N
 		//k++;		
 	}
 	
-	
+	//printf("El valor de la primera neurona %f\t, la segunda neurona es %f\n", neighVdend0[2], neighVdend0[3]);
 
 	
 	
@@ -76,7 +75,7 @@ void ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[N
 	
 }
 
-Dend CompDend(Dend prevDend, mod_prec prevSoma , mod_prec iAppIn,mod_prec neighVdend[MAX_N_SIZE+NUM_NEIGH_CELLS], int N_Size,mod_prec Connectivity_Matrix[CONN_MATRIX_MAX]){
+Dend CompDend(Dend prevDend, mod_prec prevSoma , mod_prec iAppIn,mod_prec neighVdend[MAX_TIME_MUX+MAX_NEIGH_SIZE], int N_Size,mod_prec Connectivity_Matrix[CONN_MATRIX_MAX]){
 
 	struct Dend d_output;
     struct channelParams chPrms;
@@ -228,7 +227,7 @@ dendCurrVoltPrms DendCurrVolt(struct dendCurrVoltPrms chComps){
     chComps.newI_CaH = I_CaH;//This is a state value read in DendCal
     return chComps;
 }
-mod_prec IcNeighbors(mod_prec neighVdend[MAX_N_SIZE+NUM_NEIGH_CELLS], mod_prec prevV_dend, int N_Size ,mod_prec Connectivity_Matrix[CONN_MATRIX_MAX]){
+mod_prec IcNeighbors(mod_prec neighVdend[MAX_TIME_MUX+MAX_NEIGH_SIZE], mod_prec prevV_dend, int N_Size ,mod_prec Connectivity_Matrix[CONN_MATRIX_MAX]){
 
     int i;
     mod_prec f, V, I_c, V_acc, F_acc;
@@ -623,8 +622,10 @@ inline mod_prec min(mod_prec a, mod_prec b){
 
 
 
+
+
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli.cpp
 #*
 #* Written by: George Smaragdos.

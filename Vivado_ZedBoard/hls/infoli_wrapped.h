@@ -14,7 +14,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#/******************************************************************************
+#*****************************************************************************
 #* Vivado_ZedBoard/hls/infoli_wrapped.h 
 #*
 #* Written by: Carlos Salazar-García, 2017.
@@ -23,7 +23,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #* 
 #*
 #******************************************************************************/
-
 
 
 #ifndef INFOLI_WRAPPED
@@ -41,7 +40,7 @@ typedef ap_axiu<32,4,5,5> AXI_VAL;
 
 // function prototypes
 
-void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_TIME_MUX+NUM_NEIGH_CELLS] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL OUTPUT_STREAM[MAX_TIME_MUX+NUM_NEIGH_CELLS], mod_prec Test[TESTERNUMBER]);
+void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_TIME_MUX+MAX_NEIGH_SIZE] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL OUTPUT_STREAM[MAX_TIME_MUX+MAX_NEIGH_SIZE], mod_prec Test[TESTERNUMBER]);
 
 #else
 void standalone_ComputeNetwork(cellState*, mod_prec*,  mod_prec* , int , int ,mod_prec*, mod_prec*, mod_prec*, mod_prec*);
@@ -53,7 +52,7 @@ void standalone_ComputeNetwork(cellState*, mod_prec*,  mod_prec* , int , int ,mo
 
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli_wrapped.h 
 #*
 #* Written by: Carlos Salazar-García, 2017.

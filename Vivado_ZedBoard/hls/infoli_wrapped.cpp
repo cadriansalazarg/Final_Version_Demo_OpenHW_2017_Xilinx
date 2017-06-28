@@ -18,7 +18,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli_wrapped.c
 #*
 #* Written by: Carlos Salazar-García, 2017.
@@ -38,7 +38,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 typedef ap_axiu<32,4,5,5> AXI_VAL;
 
-void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_TIME_MUX +NUM_NEIGH_CELLS] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL OUTPUT_STREAM[MAX_TIME_MUX+NUM_NEIGH_CELLS], mod_prec Test[TESTERNUMBER])
+void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_TIME_MUX +MAX_NEIGH_SIZE] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL OUTPUT_STREAM[MAX_TIME_MUX+MAX_NEIGH_SIZE], mod_prec Test[TESTERNUMBER])
 {
 	
 	#pragma HLS INTERFACE s_axilite port=local_state0 bundle=bus
@@ -61,9 +61,9 @@ void HLS_accel (cellState local_state0[MAX_TIME_MUX],  AXI_VAL INPUT_STREAM[MAX_
 
 #else
 
-void standalone_ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[NUM_NEIGH_CELLS],  mod_prec iAppin[MAX_TIME_MUX] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], mod_prec cellOut[MAX_TIME_MUX], mod_prec neighVdendOut[MAX_TIME_MUX], mod_prec Test[TESTERNUMBER]){
+void standalone_ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec neighVdendE[MAX_NEIGH_SIZE],  mod_prec iAppin[MAX_TIME_MUX] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], mod_prec cellOut[MAX_TIME_MUX], mod_prec neighVdendOut[MAX_TIME_MUX], mod_prec Test[TESTERNUMBER]){
 	
-	ComputeNetwork(local_state0, neighVdendE[NUM_NEIGH_CELLS],  iAppin, N_Size, Mux_Factor, Connectivity_Matrix, cellOut, neighVdendOut, Test);
+	ComputeNetwork(local_state0, neighVdendE[MAX_NEIGH_SIZE],  iAppin, N_Size, Mux_Factor, Connectivity_Matrix, cellOut, neighVdendOut, Test);
 
 }
 
@@ -71,8 +71,14 @@ void standalone_ComputeNetwork(cellState local_state0[MAX_TIME_MUX], mod_prec ne
 
 
 
+
+
+
+
+
+
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli_wrapped.c
 #*
 #* Written by: Carlos Salazar-García, 2017.

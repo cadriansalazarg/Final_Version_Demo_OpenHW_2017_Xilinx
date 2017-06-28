@@ -17,7 +17,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/dma_interface.cpp
 #*
 #* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf
@@ -108,16 +108,16 @@ template <typename T, int U, int TI, int TD> ap_axiu <sizeof(T)*8,U,TI,TD> push_
 // function to be accelerated in HW wrapped with AXI4-Stream interface
 
 //template <typename T, int SIZE, int U, int TI, int TD>
-void wrapped_ComputeNetwork (cellState local_state0[MAX_TIME_MUX],  AXI_VAL in_stream[MAX_TIME_MUX+NUM_NEIGH_CELLS] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL out_stream[MAX_TIME_MUX+NUM_NEIGH_CELLS], mod_prec Test[TESTERNUMBER])
+void wrapped_ComputeNetwork (cellState local_state0[MAX_TIME_MUX],  AXI_VAL in_stream[MAX_TIME_MUX+MAX_NEIGH_SIZE] , int N_Size, int Mux_Factor,mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE], AXI_VAL out_stream[MAX_TIME_MUX+MAX_NEIGH_SIZE], mod_prec Test[TESTERNUMBER])
 {
 	
 	#pragma HLS INLINE
 	
-	mod_prec iAppinN[MAX_TIME_MUX+NUM_NEIGH_CELLS]; // En esta variable se almacena los datos que vienen del AXI stream, es decir los iAppin y los V_dend de la otra ZedBoard
+	mod_prec iAppinN[MAX_TIME_MUX+MAX_NEIGH_SIZE]; // En esta variable se almacena los datos que vienen del AXI stream, es decir los iAppin y los V_dend de la otra ZedBoard
 	mod_prec iAppin[MAX_TIME_MUX]; // Esta variable contiene los iAppin, es decir el estímulo de esta FPGA
-	mod_prec cellOutN[MAX_TIME_MUX+NUM_NEIGH_CELLS]; // En esta variable se almacena los datos que van a ser enviado por AXI stream hacia el Zynq, este contiene los Vaxon y en la otra mitad del arreglo los Vdend
+	mod_prec cellOutN[MAX_TIME_MUX+MAX_NEIGH_SIZE]; // En esta variable se almacena los datos que van a ser enviado por AXI stream hacia el Zynq, este contiene los Vaxon y en la otra mitad del arreglo los Vdend
 	mod_prec cellOut[MAX_TIME_MUX]; // En esta variable se almacenan los Vaxon que salen de la función Compute Network
-	mod_prec neighVdendE[NUM_NEIGH_CELLS]; // En esta variable se almacenan los Vdend de la otra ZedBoard, son la entrada de Vdend de la otra ZedBoard
+	mod_prec neighVdendE[MAX_NEIGH_SIZE]; // En esta variable se almacenan los Vdend de la otra ZedBoard, son la entrada de Vdend de la otra ZedBoard
 	mod_prec neighVdendOut[MAX_TIME_MUX]; // En esta variable se almacenan los Vdend de la ZedBoard en la que se esta ejecutando, esta es una salida de la función computeBNetwork
 	
 	int i;
@@ -155,15 +155,15 @@ void wrapped_ComputeNetwork (cellState local_state0[MAX_TIME_MUX],  AXI_VAL in_s
 	
 	//k = 0;
 	
-	for(i=Mux_Factor; i<N_Size; i++){//for(i=MAX_TIME_MUX; i<MAX_TIME_MUX+NUM_NEIGH_CELLS; i++){
+	for(i=Mux_Factor; i<(Mux_Factor+Mux_Factor); i++){//for(i=MAX_TIME_MUX; i<MAX_TIME_MUX+NUM_NEIGH_CELLS; i++){
 		#pragma HLS PIPELINE II=1
 		cellOutN[i] = neighVdendOut[i-Mux_Factor];
 	}
 
 	// stream out result array
-	for(i=0; i<N_Size; i++){   //for(i=0; i<MAX_TIME_MUX+NUM_NEIGH_CELLS; i++){
+	for(i=0; i<(Mux_Factor+Mux_Factor); i++){   //for(i=0; i<MAX_TIME_MUX+NUM_NEIGH_CELLS; i++){
 		#pragma HLS PIPELINE II=1
-		out_stream[i] = push_stream<float,4,5,5>(cellOutN[i],i == (N_Size-1));
+		out_stream[i] = push_stream<float,4,5,5>(cellOutN[i],i == ((Mux_Factor+Mux_Factor)-1));
 		//out_stream[i] = push_stream<float,4,5,5>(cellOutN[i],i == (MAX_TIME_MUX-1+NUM_NEIGH_CELLS));
 	}
 			
@@ -219,13 +219,13 @@ int test_matrix_mult(void)
 	int i, j;
 	int err = 0;
 	
-	mod_prec iAppArray_sw[MAX_TIME_MUX]; 
-	mod_prec iAppArray_hw[MAX_TIME_MUX+NUM_NEIGH_CELLS];
+	mod_prec iAppArray_sw[MAX_TIME_MUX]; // iAppArray para la ejecución del modelo de referencia, es el estímulo de entrada del software
+	mod_prec iAppArray_hw[MAX_TIME_MUX+MAX_NEIGH_SIZE]; // iAppArray_hw para la ejecución en hardware, es el estímulo de entrada del hardware
 	
 	mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE];
 	
-	cellState IniArray_sw[MAX_TIME_MUX];  
-	cellState IniArray_hw[MAX_TIME_MUX];  
+	cellState IniArray_sw[MAX_TIME_MUX];  // Estado inicial de la celda modelo de referencia
+	cellState IniArray_hw[MAX_TIME_MUX];  // Estado inicial de la celda
 	
 	mod_prec iApp;
 	int simSteps = 0;
@@ -234,18 +234,18 @@ int test_matrix_mult(void)
     int Mux_Factor = TIME_MUX_FACTOR;
     int N_Size = TIME_MUX_FACTOR + NUM_NEIGH_CELLS;
     
-    AXI_VAL inp_stream[MAX_TIME_MUX+NUM_NEIGH_CELLS];
-	AXI_VAL out_stream[MAX_TIME_MUX+NUM_NEIGH_CELLS];
+    AXI_VAL inp_stream[MAX_TIME_MUX+MAX_NEIGH_SIZE];
+	AXI_VAL out_stream[MAX_TIME_MUX+MAX_TIME_MUX];
 	
 	mod_prec Test_sw[TESTERNUMBER];
 	mod_prec Test_hw[TESTERNUMBER];
 	
-	mod_prec cellOut_sw[MAX_TIME_MUX]; 
-	mod_prec cellOut_hw[MAX_TIME_MUX+NUM_NEIGH_CELLS]; 
+	mod_prec cellOut_sw[MAX_TIME_MUX]; // Contiene los Vaxon de salida del modelo de referencia
+	mod_prec cellOut_hw[MAX_TIME_MUX+MAX_TIME_MUX]; // Contiene los Vaxon de la salida del hardware
 	
-	mod_prec neighVdendE[NUM_NEIGH_CELLS];   
+	mod_prec neighVdendE[MAX_NEIGH_SIZE];   // Variable de entrada, contiene los Vdend de la otra ZedBoard
 	
-	mod_prec neighVdendOut_sw[MAX_TIME_MUX]; 
+	mod_prec neighVdendOut_sw[MAX_TIME_MUX]; // Vdend de salida del modelo de referencia, almacena los Vdend locales
 	
 	//************************************************
 	
@@ -295,7 +295,7 @@ int test_matrix_mult(void)
     }
     
     simTime = SIMTIME; // in miliseconds SIMTIME = 1
-    simSteps = ceil(simTime/DELTA); 
+    simSteps = ceil(simTime/DELTA); // DELTA es igual a 0.05 = 1/20
     
 
 
@@ -304,27 +304,29 @@ int test_matrix_mult(void)
 	    if(i>20000-1 && i<20500-1){ iApp = 6.0f;} // start @ 1 because skipping initial values
         else{ iApp = 0.0f;}
         
-        for(j=0;j<Mux_Factor;j++){ //for(j=0;j<MAX_TIME_MUX;j++){  
-            iAppArray_hw[j] = iApp; 
-            iAppArray_sw[j] = iApp; 
+        for(j=0;j<Mux_Factor;j++){ //for(j=0;j<MAX_TIME_MUX;j++){  // Se carga la primera parte del estímulo ******************
+            iAppArray_hw[j] = iApp; // Primera parte del estimulo para el hardware
+            iAppArray_sw[j] = iApp; // Estimulo para el software
         }
         
-        for(j=Mux_Factor;j<N_Size;j++){ //for(j=MAX_TIME_MUX;j<NUM_NEIGH_CELLS+MAX_TIME_MUX;j++){  
-			if (i==0){  
+        for(j=Mux_Factor;j<N_Size;j++){ //for(j=MAX_TIME_MUX;j<NUM_NEIGH_CELLS+MAX_TIME_MUX;j++){  // Se carga la segunda parte del arreglo
+			if (i==0){  // Si es el primer paso, se cargan el valor de Vdend por defecto
 				iAppArray_hw[j] = -60.0f;
 			}else{
-				iAppArray_hw[j] = cellOut_hw[j]; 
+				if (((N_Size-Mux_Factor)-1)>Mux_Factor)
+					iAppArray_hw[j] = cellOut_hw[Mux_Factor]; // Revisar esto
+				else
+					iAppArray_hw[j] = cellOut_hw[j]; // Revisar esto
 			}
         }
         
         for(j=0;j<N_Size-Mux_Factor;j++){  //for(j=0;j<NUM_NEIGH_CELLS;j++){ 
-			if (i==0){ 
+			if (i==0){ // si es el primer paso
 				neighVdendE[j] = -60.0f;
-			}else{
-				neighVdendE[j] = neighVdendOut_sw[j];
+			}else{				
+				neighVdendE[j] = cellOut_hw[Mux_Factor];
 			}
         }
-        
         
         // Print in the file the step, the time, and the stimulus *********
         sprintf(temp, "%d %.2f %.1f ", i+1, i*0.05,  iAppArray_sw[0]); // start @ 1 because skipping initial values
@@ -346,21 +348,29 @@ int test_matrix_mult(void)
         HLS_accel (IniArray_hw,  inp_stream, N_Size, Mux_Factor, Connectivity_Matrix, out_stream, Test_hw);
         
         // extract the output array from the out stream 
-		for(j=0; j<N_Size; j++){//for(j=0; j<MAX_TIME_MUX+NUM_NEIGH_CELLS; j++){
+		for(j=0; j<(Mux_Factor+Mux_Factor); j++){//for(j=0; j<MAX_TIME_MUX+NUM_NEIGH_CELLS; j++){
 			cellOut_hw[j] = pop_stream<float,4,5,5>(out_stream[j]);
 		}
 				
 		// Compare the software result vs hardware results
-		for (j = 0; j<Mux_Factor; j++){     //for (j = 0; j<MAX_TIME_MUX; j++){ // Compare Axon voltages
-			if (cellOut_hw[j] != cellOut_sw[j])
+		for (j = 0; j<Mux_Factor; j++){     //for (j = 0; j<MAX_TIME_MUX; j++){ // Compara los Vaxon
+			if (cellOut_hw[j] != cellOut_sw[j]){
+				printf("El valor de sw es %f\t el valor de hardware es %f\n",cellOut_sw[j],cellOut_hw[j]);
 				err++;
+			}
+		}
+		
+				
+			
+		
+		
+		
+		for (j = 0; j<Mux_Factor; j++){     //for (j = 0; j<MAX_TIME_MUX; j++){ // Compara los Vdend
 			if (cellOut_hw[j+Mux_Factor] != neighVdendOut_sw[j])
 				err++;
-				
-			//printf("Step %d y Neuron %d Vaxon_SW: %f\t y Vaxon_HW %f\t", i, j, cellOut_sw[j], cellOut_hw[j]);
-			//printf("VDend_SW: %f\t and VDend_HW %f\n", neighVdendOut_sw[j], cellOut_hw[j+MAX_TIME_MUX]);
-		}
-				
+		}	
+		
+			
 		// Write the result in the file *******************************
 		for(j=0;j<Mux_Factor;j++){   //for(j=0;j<MAX_TIME_MUX;j++){
             sprintf(temp, "%d: %.8f ", j, cellOut_hw[j]);
@@ -368,7 +378,7 @@ int test_matrix_mult(void)
         }
         
         // Write the result in the file *******************************
-		for(j=Mux_Factor;j<N_Size;j++){   //for(j=MAX_TIME_MUX;j<MAX_TIME_MUX+NUM_NEIGH_CELLS;j++){
+		for(j=Mux_Factor;j<(Mux_Factor+Mux_Factor);j++){   //for(j=MAX_TIME_MUX;j<MAX_TIME_MUX+NUM_NEIGH_CELLS;j++){
             sprintf(temp, "%d: %.8f ", j-Mux_Factor, cellOut_hw[j]); //sprintf(temp, "%d: %.8f ", j-MAX_TIME_MUX, cellOut_hw[j]);
             fputs(temp, pOutFileVdend);
         }
@@ -392,14 +402,3 @@ int test_matrix_mult(void)
 
 	return 0;        
 }
-
-/*
-#/******************************************************************************
-#* Vivado_ZedBoard/hls/dma_interface.cpp
-#*
-#* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf
-#* Modified by : Carlos Salazar-García, 2017
-#* This source code is the kernel of the algorithm
-#* 
-#*
-#******************************************************************************/

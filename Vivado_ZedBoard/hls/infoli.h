@@ -17,7 +17,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli.h
 #*
 #* Written by: George Smaragdos.
@@ -26,7 +26,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #* 
 #*
 #******************************************************************************/
-
 
 #ifndef INFOLI
 #define INFOLI
@@ -38,18 +37,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 /*** MACROS ***/
 //Network Parameters///////////////////////////////////////////////////////////////////////////////////////////
 #define RAND_INIT 0 // make it zero to facilitate debugging
-#define SIMTIME 5 // in ms, for when no input file is provided  3000
+#define SIMTIME 50 // in ms, for when no input file is provided  3000
 //IO network size is IO_NETWORK_DIM1*IO_NETWORK_DIM2 times the TIME_MUX_FACTOR
 
 //Change the Time Mux Factor to change the number of simulated cells in the network
-#define TIME_MUX_FACTOR 1500
-#define NUM_NEIGH_CELLS 1500
-#define HW_CELLS 1
+#define TIME_MUX_FACTOR 2000
+#define NUM_NEIGH_CELLS 8000
+#define HW_CELLS 50
 #define IO_NETWORK_SIZE HW_CELLS*TIME_MUX_FACTOR
 
 //Maximum Number of cells and time-multiplexing
-#define MAX_N_SIZE 1500
-#define MAX_TIME_MUX 1500
+
+#define MAX_TIME_MUX 2000
+#define MAX_NEIGH_SIZE 8000
 #define CONN_MATRIX_MAX MAX_TIME_MUX + NUM_NEIGH_CELLS 	//before   MAX_N_SIZE*MAX_N_SIZE
 #define CONN_MATRIX_HW MAX_TIME_MUX	+ NUM_NEIGH_CELLS 	//before   CONN_MATRIX_MAX/8
 #define IAPP_MAX_CHARS 1 //2 integer, the dot, 2 decimals and the delimiter
@@ -206,8 +206,9 @@ inline mod_prec min(mod_prec a, mod_prec b);
 
 #endif
 
+
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/infoli.h
 #*
 #* Written by: George Smaragdos.

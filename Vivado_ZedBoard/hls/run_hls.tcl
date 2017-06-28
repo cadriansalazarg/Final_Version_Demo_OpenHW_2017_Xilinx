@@ -15,7 +15,7 @@
 
 
 
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/run_hls.tcl: Vivado hls script
 #*
 #* Written by: Carlos Salazar-García, 2017.
@@ -23,7 +23,7 @@
 #* This code is a script to execute vivado HLS. It was tested in Vivado HLS 2016.4
 #* vivado_hls -f run_hls.tcl
 #*
-#******************************************************************************/
+#******************************************************************************
 
 
 
@@ -45,8 +45,13 @@ csim_design -clean
 csim_design 
 csynth_design
 #the next line must be uncommented to do the cosimulation
-cosim_design  
+#cosim_design  
 export_design -format ip_catalog
+
+
+
+exec cp -r hls_wrapped_computenetwork_prj/solution0/impl/ip/ ../../ip/
+
 close_project
 
 
