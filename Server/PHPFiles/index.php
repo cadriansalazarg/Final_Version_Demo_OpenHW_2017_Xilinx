@@ -1,10 +1,18 @@
+<!------------------------------------------------------------------------------------------------
+#FILE NAME : index.php
+#Written by: Daniel Zamora Umaña.
+#This code is a script to create a website. It was tested and run with Apache server.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#PHP 5 HTML5
+-------------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
-		<title>System Test</title>
+		<title>ZedBrain</title>
 		
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head> 
@@ -211,3 +219,13 @@ else if(number==2){alert("Select a File with the stimulus.");}
 
 	</body>
 </html>
+
+
+<!------------------------------------------------------------------------------------------------
+#FILE NAME : index.php
+#Written by: Daniel Zamora Umaña.
+#This code is a script to create a website. It was tested and run with Apache server.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#PHP 5 HTML 5
+-------------------------------------------------------------------------------------------------->
