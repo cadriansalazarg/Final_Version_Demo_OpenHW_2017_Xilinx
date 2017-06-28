@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : index.php
-#Written by: Daniel Zamora_Umaña.
+#Written by: Daniel Zamora-Umaña.
 #This code is a script to create a website. It was tested and run with Apache server.
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
@@ -224,7 +224,7 @@ else if(number==2){alert("Select a File with the stimulus.");}
 
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : index.php
-#Written by: Daniel Zamora_Umaña.
+#Written by: Daniel Zamora-Umaña.
 #This code is a script to create a website. It was tested and run with Apache server.
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
