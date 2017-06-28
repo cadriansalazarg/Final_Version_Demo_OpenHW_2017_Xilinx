@@ -7,23 +7,23 @@
 #THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #******************************************************************************************************************
-#FILE NAME = script_std.py
+#FILE NAME = std_stimulus_gen.py
 #Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umaña.
-#This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
+#This script generate and standard initialization for the network with a fixed Nsize and number of steps.
 #CREATED = 2016
 #LAST ACTUALIZATION = 27/06/2017
 #Python 2.7
 #******************************************************************************************************************
 
-n=100	#numero celdas
+n_size=100	#This variable creates 'n_size' cells, this number is the total network size to simulate. 
 m=0
 acum=0
-rep=50000	#replicas  iapp
-init=19998	#inicio escalon restar 2 en cada limite
-fin=20498	#final escalon restar 2 en cada limite
+steps=50000	#Number of step that you want to create.
+init=19998	#initial step with stimulation.
+fin=20498	#final step with stimulation.
 
 
-archivo = open("data1.txt","r") 
+archivo = open("data1.txt","r") 	#Reference initialization file
 for line in archivo.readlines():
 	for i in range(0,len(line)):
 		if line[i]=='\t':
@@ -31,33 +31,33 @@ for line in archivo.readlines():
 			acum=acum.rstrip()
 			varstr=line[:i]
 			if m==0:
-				f = open("data.txt","w")
+				f = open("data.txt","w")  # open a new file
 				m=1
 			else:
 				f = open("data.txt","a+") 
 			f.write(varstr)
 			print(varstr)
 			f.write('\t') 
-			for b in range(0,n):
+			for b in range(0,n):		#write in the file data.txt the initialization for every cell.
 				f.write(acum)
 				f.write('\t') 
 			f.write('\n')
 f.close()
-archivo.close() 
+archivo.close() 			#close file
 
 f = open("data.txt","a+")
 line=f.readlines()
 for i in range(0,rep):
 	acum = str(i)+':'
-	if (i>=init and i<=fin):
-		for b in range(0,n):
+	if (i>=init and i<=fin):	# write the steps for every cell in the network. The stimulus change for the middle of the network
+		for b in range(0,n):	
 			if(b>n/2):
 				acum+= '\t'+'6'
 			else:
 				acum+= '\t'+'0'
 		acum+='\n'
 		f.write(acum)
-	elif(i>=init+5000 and i<=fin+5000):
+	elif(i>=init+5000 and i<=fin+5000):	# write the steps for every cell in the network. The stimulus change for the half of the network.
 		for b in range(0,n):
 			if(b>n/2):
 				acum+= '\t'+'0'
@@ -66,18 +66,17 @@ for i in range(0,rep):
 		acum+='\n'
 		f.write(acum)
 	else:
-		for b in range(0,n):
+		for b in range(0,n):		#up the final step with stimulation, the rest of the steps has stimulus 0.
 				acum+= '\t'+'0'
 		acum+='\n'
 		f.write(acum) 
 f.close()
 #******************************************************************************************************************
-#FILE NAME = script_std.py
+#FILE NAME = std_stimulus_gen.py
 #Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umaña.
-#This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
+#This script generate and standard initialization for the network with a fixed Nsize and number of steps.
 #CREATED = 2016
-#LAST ACTUALIZATION = 2017
+#LAST ACTUALIZATION = 27/06/2017
 #Python 2.7
-#Copyright 2017 Erasmus Brain Project
 #******************************************************************************************************************
 
