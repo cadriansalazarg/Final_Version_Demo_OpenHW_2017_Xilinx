@@ -13,7 +13,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 ## Directory structure
 PHPFiles/ ------------ this directory contains the files necessary to create the website.
 
-PythonFiles/ ------------ this directory contains the python scripts used in the simulation and graph creation. In Ubuntu, 
+PythonFiles/ ------------ this directory contains the python scripts used in the simulation and graph creation.
 
 
 ## Instructions (Last revision: 6-28-2017)
@@ -27,8 +27,9 @@ To build the website, several steps have to be executed:
 7. Restart Apache to make these changes take effect.
 8. Move php files and python files to the directory **public_html**.
 9. Create extra directory called css and move the CSS files in there.
-10. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size** **upload_max_filesize** and **memory_limit**.
+10. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
 
+To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7 and PHP5.
 
 ## Collaborators
 
@@ -38,4 +39,8 @@ Undergraduate Assistants: Kaleb Alfaro-Badilla, Daniel Zamora-Uma√±a, Marco Acu√
 
 Advisers: Christos Strydis (Erasmus MC), Alfonso Chacon-Rodriguez (TEC)
 
+## License
+Copyright 2017 Erasmus Brain project
+
+BSD-3-Clause
 
