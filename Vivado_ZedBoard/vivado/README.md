@@ -13,8 +13,8 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
-## Directory structure
-Instructions (Last revision: 6-28-2017)
+
+## Instructions (Last revision: 6-28-2017)
 
 In order to get the Zedbrain platform running on the Zedboard:
 
