@@ -10,12 +10,17 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
-## Directory structure
-hls/ ------------ All files to generate the hardware accelerator using Vivado HLS 2016.4
-
-vivado/          ------------ A script tcl to generate all the vivado project. Script was tested in Vivado 2016.4
-
-arw_sw/  ----------- All software used in the Vivado SDK 2016.4
+## How to compile
+- From Vivado project, export hardware & bitstream to project.sdk directory
+- Create Xilinx SDK project from example "lwip echo server"
+- Replace the following files:
+	- echo.c
+	- main.c
+- Add the following files:
+	- dma_main.c
+	- lib_xmmult_hw.c
+	- lib_xmmult_hw.h
+- Modify 
 
 ## Collaborators
 
