@@ -1,3 +1,13 @@
+<!------------------------------------------------------------------------------------------------
+#FILE NAME : info.php
+#Written by: Daniel Zamora Umaña.
+#This code is a script to create a webpage. It was tested and run with Apache server.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#PHP 5 HTML5
+-------------------------------------------------------------------------------------------------->
+
+
 <html>
 	<head>
 		<title>About System Test</title>
@@ -83,3 +93,13 @@
 		</footer>	
 	</body>
 </html>
+
+<!------------------------------------------------------------------------------------------------
+#FILE NAME : info.php
+#Written by: Daniel Zamora Umaña.
+#This code is a script to create a webpage. It was tested and run with Apache server.
+#CREATED : 2016
+#LAST ACTUALIZATION : 2017
+#PHP 5 HTML5
+-------------------------------------------------------------------------------------------------->
+
