@@ -1,5 +1,3 @@
-# ZedBrain project 
-
 # ZedBrain platform
 # A research application from the Erasmus Brain project at Erasmus Medical Center (Erasmus MC) Neuroscience Department 
 # Site: http://www.erasmusbrainproject.com/
