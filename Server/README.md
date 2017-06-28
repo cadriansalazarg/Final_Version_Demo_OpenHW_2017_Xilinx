@@ -13,7 +13,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 ## Directory structure
 PHPFiles/ ------------ this directory contains the files necessary to create the website.
 
-PythonFiles/ ------------ this directory contains the python scripts used in the simulation and graph creation. In Ubuntu, 
+PythonFiles/ ------------ this directory contains the python scripts used in the simulation and graph creation.
 
 
 ## Instructions (Last revision: 6-28-2017)
