@@ -237,7 +237,7 @@ mod_prec IcNeighbors(mod_prec neighVdend[MAX_TIME_MUX+MAX_NEIGH_SIZE], mod_prec 
 
     I_c = 0.0f;
 
-	IcNeighbors_label0:	for(i=0;i<N_Size;i++){  // El for llega hasta 16
+	IcNeighbors_label0:	for(i=0;i<N_Size;i++){  
 
 		V = prevV_dend - neighVdend[i];
 		f= V*expf(V*V*hundred);

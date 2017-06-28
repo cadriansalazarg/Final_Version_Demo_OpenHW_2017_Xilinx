@@ -45,7 +45,7 @@ csim_design -clean
 csim_design 
 csynth_design
 #the next line must be uncommented to do the cosimulation
-#cosim_design  
+cosim_design  
 export_design -format ip_catalog
 
 
