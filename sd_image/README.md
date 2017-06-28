@@ -1,1 +1,0 @@
-# SD boot image file
