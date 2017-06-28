@@ -27,3 +27,8 @@ PhD Students: Georgios Smaragdos, Carlos Salazar-Garcia
 Undergraduate Assistants: Kaleb Alfaro-Badilla, Daniel Zamora-Umaña, Marco Acuña-Vargas
 
 Advisers: Christos Strydis (Erasmus MC), Alfonso Chacon-Rodriguez (TEC)
+
+## License
+Copyright 2017 Erasmus Brain project
+
+BSD-3-Clause
