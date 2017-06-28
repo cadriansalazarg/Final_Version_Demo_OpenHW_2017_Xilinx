@@ -10,7 +10,7 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
-<<<<<<< HEAD
+
 ## How to compile
 - From Vivado project, export hardware & bitstream to project.sdk directory
 - Create Xilinx SDK project from example "lwip echo server"
@@ -22,7 +22,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 	- lib_xmmult_hw.c
 	- lib_xmmult_hw.h
 - Modify 
-=======
+
 ## Directory structure
 In order to loaded the SDK software
 
@@ -35,7 +35,7 @@ In order to loaded the SDK software
 7. Add the UART port
 8. Modify the size of the stack and heap in function of the number of neurons.
 9. Run the apllication
->>>>>>> 8a96172cd5cb2ac717ac2b9a5f2bb5322524c325
+
 
 ## Collaborators
 
