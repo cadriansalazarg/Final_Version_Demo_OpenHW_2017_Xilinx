@@ -42,14 +42,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 //Change the Time Mux Factor to change the number of simulated cells in the network
 #define TIME_MUX_FACTOR 2000
-#define NUM_NEIGH_CELLS 8000
+#define NUM_NEIGH_CELLS 6000
 #define HW_CELLS 50
 #define IO_NETWORK_SIZE HW_CELLS*TIME_MUX_FACTOR
 
 //Maximum Number of cells and time-multiplexing
 
 #define MAX_TIME_MUX 2000
-#define MAX_NEIGH_SIZE 8000
+#define MAX_NEIGH_SIZE 6000
 #define CONN_MATRIX_MAX MAX_TIME_MUX + NUM_NEIGH_CELLS 	//before   MAX_N_SIZE*MAX_N_SIZE
 #define CONN_MATRIX_HW MAX_TIME_MUX	+ NUM_NEIGH_CELLS 	//before   CONN_MATRIX_MAX/8
 #define IAPP_MAX_CHARS 1 //2 integer, the dot, 2 decimals and the delimiter

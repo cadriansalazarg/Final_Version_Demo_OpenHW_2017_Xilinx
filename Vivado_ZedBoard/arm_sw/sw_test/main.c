@@ -17,7 +17,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/main.cpp
 #*
 #* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf
@@ -33,8 +33,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include "xparameters.h"
 #include "xtmrctr.h"
 #include "xaxidma.h"
-#include "lib_xmmult_hw.h"
-//#include "xhls_accel.h"
+#include "lib_xaccel_hw.h"
 
 
 
@@ -288,7 +287,7 @@ int main(int argc, char **argv)
 }
 
 /*
-#/******************************************************************************
+#******************************************************************************
 #* Vivado_ZedBoard/hls/main.cpp
 #*
 #* Example taken of: https://www.xilinx.com/support/documentation/application_notes/xapp1170-zynq-hls.pdf

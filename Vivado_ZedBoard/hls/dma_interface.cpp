@@ -219,13 +219,13 @@ int test_matrix_mult(void)
 	int i, j;
 	int err = 0;
 	
-	mod_prec iAppArray_sw[MAX_TIME_MUX]; // iAppArray para la ejecución del modelo de referencia, es el estímulo de entrada del software
-	mod_prec iAppArray_hw[MAX_TIME_MUX+MAX_NEIGH_SIZE]; // iAppArray_hw para la ejecución en hardware, es el estímulo de entrada del hardware
+	mod_prec iAppArray_sw[MAX_TIME_MUX]; 
+	mod_prec iAppArray_hw[MAX_TIME_MUX+MAX_NEIGH_SIZE]; 
 	
 	mod_prec Connectivity_Matrix[CONN_MATRIX_SIZE];
 	
-	cellState IniArray_sw[MAX_TIME_MUX];  // Estado inicial de la celda modelo de referencia
-	cellState IniArray_hw[MAX_TIME_MUX];  // Estado inicial de la celda
+	cellState IniArray_sw[MAX_TIME_MUX];  
+	cellState IniArray_hw[MAX_TIME_MUX];  
 	
 	mod_prec iApp;
 	int simSteps = 0;
@@ -240,12 +240,12 @@ int test_matrix_mult(void)
 	mod_prec Test_sw[TESTERNUMBER];
 	mod_prec Test_hw[TESTERNUMBER];
 	
-	mod_prec cellOut_sw[MAX_TIME_MUX]; // Contiene los Vaxon de salida del modelo de referencia
-	mod_prec cellOut_hw[MAX_TIME_MUX+MAX_TIME_MUX]; // Contiene los Vaxon de la salida del hardware
+	mod_prec cellOut_sw[MAX_TIME_MUX]; 
+	mod_prec cellOut_hw[MAX_TIME_MUX+MAX_TIME_MUX]; 
 	
-	mod_prec neighVdendE[MAX_NEIGH_SIZE];   // Variable de entrada, contiene los Vdend de la otra ZedBoard
+	mod_prec neighVdendE[MAX_NEIGH_SIZE];   
 	
-	mod_prec neighVdendOut_sw[MAX_TIME_MUX]; // Vdend de salida del modelo de referencia, almacena los Vdend locales
+	mod_prec neighVdendOut_sw[MAX_TIME_MUX]; 
 	
 	//************************************************
 	
@@ -304,24 +304,24 @@ int test_matrix_mult(void)
 	    if(i>20000-1 && i<20500-1){ iApp = 6.0f;} // start @ 1 because skipping initial values
         else{ iApp = 0.0f;}
         
-        for(j=0;j<Mux_Factor;j++){ //for(j=0;j<MAX_TIME_MUX;j++){  // Se carga la primera parte del estímulo ******************
-            iAppArray_hw[j] = iApp; // Primera parte del estimulo para el hardware
-            iAppArray_sw[j] = iApp; // Estimulo para el software
+        for(j=0;j<Mux_Factor;j++){ //for(j=0;j<MAX_TIME_MUX;j++){  
+            iAppArray_hw[j] = iApp;
+            iAppArray_sw[j] = iApp; 
         }
         
-        for(j=Mux_Factor;j<N_Size;j++){ //for(j=MAX_TIME_MUX;j<NUM_NEIGH_CELLS+MAX_TIME_MUX;j++){  // Se carga la segunda parte del arreglo
-			if (i==0){  // Si es el primer paso, se cargan el valor de Vdend por defecto
+        for(j=Mux_Factor;j<N_Size;j++){ //for(j=MAX_TIME_MUX;j<NUM_NEIGH_CELLS+MAX_TIME_MUX;j++){  
+			if (i==0){  
 				iAppArray_hw[j] = -60.0f;
 			}else{
 				if (((N_Size-Mux_Factor)-1)>Mux_Factor)
-					iAppArray_hw[j] = cellOut_hw[Mux_Factor]; // Revisar esto
+					iAppArray_hw[j] = cellOut_hw[Mux_Factor]; 
 				else
-					iAppArray_hw[j] = cellOut_hw[j]; // Revisar esto
+					iAppArray_hw[j] = cellOut_hw[j]; 
 			}
         }
         
         for(j=0;j<N_Size-Mux_Factor;j++){  //for(j=0;j<NUM_NEIGH_CELLS;j++){ 
-			if (i==0){ // si es el primer paso
+			if (i==0){ 
 				neighVdendE[j] = -60.0f;
 			}else{				
 				neighVdendE[j] = cellOut_hw[Mux_Factor];
@@ -355,7 +355,7 @@ int test_matrix_mult(void)
 		// Compare the software result vs hardware results
 		for (j = 0; j<Mux_Factor; j++){     //for (j = 0; j<MAX_TIME_MUX; j++){ // Compara los Vaxon
 			if (cellOut_hw[j] != cellOut_sw[j]){
-				printf("El valor de sw es %f\t el valor de hardware es %f\n",cellOut_sw[j],cellOut_hw[j]);
+				printf(" sw  %f\t hw %f\n",cellOut_sw[j],cellOut_hw[j]);
 				err++;
 			}
 		}
