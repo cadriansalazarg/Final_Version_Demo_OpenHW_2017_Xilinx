@@ -21,19 +21,24 @@ Script_stimuli_gen/ ------------ this directory contains the python scripts used
 To build the website, several steps have to be executed:
 1. Install Apache2 server. 
 2. Install PHP 5 or later.
-3. Create a directory that will hold the website. In Ubuntu, create the directory like this **/var/www/zedbrain.com/public_html**.
+3. Create a directory that will hold the website. In Ubuntu, create the directory like this _/var/www/zedbrain.com/public___html_.
 4. Give extra permissions to the general web directory. In Ubuntu, type **sudo chmod -R 755 /var/www**.
-5. Make a copy to the file in **/etc/apache2/sites-available/000-default.conf** and change the name by zedbrain.com.conf
-6. Change several directives in this file like ServerName and DocumentRoot according the new website.
-7. Restart Apache to make these changes take effect.
-8. Move php files and python files to the directory **public_html**.
-9. Create extra directory called **css** and move the CSS files in there.
-10. Create extra directory called **images** in public_html directory and put all the images.tar files in there. 
-11. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
-12. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
-13. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
+5. Make a copy to the file in _/etc/apache2/sites-available/000-default.conf_ and change the name by **zedbrain.com.conf**.
+6. Add several directives in this file like ServerName **zedbrain.com**, ServerAlias **www.zedbrain.com** and DocumentRoot _/var/www/zedbrain.com/public___html_.
+7. Enable the website typing **sudo a2ensite zedbrain.com.conf**.
+8. Disable the default site typing **sudo a2dissite 000-default.conf**.
+9. Restart Apache to make these changes take effect typing **sudo service apache2 restart**.
+10. Move php files and python files to the directory _zedbrain.com/public___html_.
+11. Create extra directory called **css** and move the CSS files in there.
+12. Create extra directory called **images** in public_html directory and put all the images.tar files in there. 
+13. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
+14. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
+15. Give to _public___html_ directory and _file_ directory extra permissions by clicking in properties/permissions/others access/create and delete files.
+16. To make the website more flexible, open the file in the route _/etc/php5/apache2_ and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
+17. Test the website by using to Firefox web browser and typing localhost.
 
-To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7 and PHP5.
+
+To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7, Firefox 44.0 and PHP5.
 
 ## Collaborators
 
