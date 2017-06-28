@@ -15,6 +15,7 @@ PHPFiles/ ------------ this directory contains the files necessary to create the
 
 PythonFiles/ ------------ this directory contains the python scripts used in the simulation and graph creation.
 
+Script_stimuli_gen/ ------------ this directory contains the python scripts used in to create the network stimulus.
 
 ## Instructions (Last revision: 6-28-2017)
 To build the website, several steps have to be executed:
@@ -28,8 +29,8 @@ To build the website, several steps have to be executed:
 8. Move php files and python files to the directory **public_html**.
 9. Create extra directory called **css** and move the CSS files in there.
 10. Create extra directory called **images** in public_html directory and put all the images.tar files in there. 
-11. Create extra directory called **file** in public_html directory. This 	directory is used to upload the stimulation file.
-12. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give write permissions by clicking in properties/permissions/others access/read and write.
+11. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
+12. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
 13. To make the website more flexible, open the file in the route **/etc/php5/apache2** and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
 
 To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7 and PHP5.
