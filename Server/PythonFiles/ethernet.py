@@ -9,7 +9,7 @@
 
 #******************************************************************************************************************
 #FILE NAME = ethernet.py
-#Written by: Kaleb Alfaro_Badilla & Daniel Zamora_Umaña.
+#Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umaña.
 #This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
 #CREATED = 2016
 #LAST ACTUALIZATION = 27/06/2017
@@ -298,7 +298,7 @@ NETWORK.print_file("dataG.txt")		#Save a file with the output.
 
 #******************************************************************************************************************
 #FILE NAME = ethernet.py
-#Written by: KalebAlfaro_Badilla & Daniel Zamora_Umaña.
+#Written by: KalebAlfaro-Badilla & Daniel Zamora-Umaña.
 #This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
 #CREATED = 2016
 #LAST ACTUALIZATION = 2017
