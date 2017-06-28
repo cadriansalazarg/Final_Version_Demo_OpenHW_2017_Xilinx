@@ -10,7 +10,9 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
-## Directory structure
+## Instructions (Last revision: 6-28-2017)
+
+
 In order to loaded the SDK software
 
 1. Open the SDK from Vivado
@@ -23,6 +25,7 @@ In order to loaded the SDK software
 8. Modify the size of the stack and heap in function of the number of neurons.
 9. Run the apllication
 
+
 ## Collaborators
 
 PhD Students: Georgios Smaragdos, Carlos Salazar-Garcia
@@ -30,8 +33,3 @@ PhD Students: Georgios Smaragdos, Carlos Salazar-Garcia
 Undergraduate Assistants: Kaleb Alfaro-Badilla, Daniel Zamora-Umaña, Marco Acuña-Vargas
 
 Advisers: Christos Strydis (Erasmus MC), Alfonso Chacon-Rodriguez (TEC)
-
-
-
-
-
