@@ -1,35 +1,22 @@
-#Note: This license has also been called the "New BSD License" or "Modified BSD License". See also the 2-clause BSD License.
-#Copyright <YEAR> <COPYRIGHT HOLDER>
-#Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-#1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-#2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-#3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-#/******************************************************************************
-#* Server/PythonFiles/ethernet.py
-#* Python version: 2.7.12
-#* Written by: Kaleb Alfaro & Daniel Zamora 2017
-#* 
-#* This script is the main interface between the server and ZedBoards
-#* 
-#*
-#******************************************************************************/
-
-
+#******************************************************************************************************************
+#FILE NAME = ethernet.py
+#Written by: Kaleb Alfaro Badilla & Daniel Zamora Umaña.
+#This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
+#CREATED = 2016
+#LAST ACTUALIZATION = 2017
+#Python 2.7
+#******************************************************************************************************************
 
 #Libraries
 #------------------------------o----------------------------#
 import socket
-import sys                          #libraries
+import sys                          
 from threading import Thread
 import struct
 import sched, time
 #------------------------------o----------------------------#
 
-############ Definitions of data structures for data received from client #########################################
-
-
+# Definitions of data structures for data received from client 
 class data_transfer(Thread):
 	def __init__(self,ip,port,tx,state,n_size): 
 		Thread.__init__(self)
@@ -39,19 +26,18 @@ class data_transfer(Thread):
 		self.state = state 
 		self.n_size = n_size
 	def run(self): 
-		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    #Create a socket
 		sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 1024)
 		# Connect the socket to the port where the server is listening
 		server_address = (self.Ip, 7)
 		sock.connect(server_address)
 		try:
-			sock.sendall(self.tx)
+			sock.sendall(self.tx)		     #Send the data.
 			self.rx = ""
-			finished = False
 			if self.state==1:
 				totalsent=0
 				MSGLEN= 4*self.n_size*2      #Received message lenght= 2 vdend & 4 float.
-				while totalsent < MSGLEN:
+				while totalsent < MSGLEN:    #Wait for the device response
 					
             				self.rx = self.rx + sock.recv(1024)
             				totalsent= len(self.rx)
@@ -64,7 +50,7 @@ class data_transfer(Thread):
 
 
 
-class FPGA_device: #check
+class FPGA_device: #device's structure, here every device receive an ip, id and local n_size.
 	ID_count = 0
 	def __init__(self, ip, port, n_size):
 		self.Ip = ip
@@ -107,7 +93,7 @@ class simNetwork: #this class initialize the network from received file
 	MIN = 1000
 	def __init__(self, N_size, simSteps): #N_size is the simCell quantity to append in the list #check
 		self.steps = simSteps		
-		for n in range(N_size):
+		for n in range(N_size):	#Create the network.
 			self.size = N_size
 			self.network.append(simCell(simSteps))
 		for n in range(simSteps):
@@ -115,7 +101,7 @@ class simNetwork: #this class initialize the network from received file
 	def set_network(self, source): #source is the file location (read only) #check
 		archivo = open(source,"r")
 		lines=archivo.readlines()
-		for i in range(self.size):
+		for i in range(self.size):	#is loaded the initialization from file.
 			self.network[i].dend_V_dend=        float(lines[0].split('\t')[i+1])
 			self.vdend.append(self.network[i].dend_V_dend)
 			self.network[i].dend_Calcium_r=     float(lines[1].split('\t')[i+1])
@@ -141,54 +127,58 @@ class simNetwork: #this class initialize the network from received file
 			for j in range(self.size):
 				self.network[j].iapp[i] = float(lines[19+i].split('\t')[j+1])
 
-		archivo.close()
+		archivo.close()		#close the file
+
+
+######################################## INITIALIZATION SECTION #################################################
 	def hw_init(self, fpga_devices): # setup the hardware with the initialization parameters
-		print "hw_init"		
+			
 		count_simCell = 0
 		tx_list = []
 		state=0
 		
 		for device in fpga_devices: #generates messages for each device
 			tx=""	
+			#package that contains the N size for every device.
+			packer = struct.Struct('i')
+			tx += packer.pack(device.fpga_n_size)
+			#package of 19 float data of the init state for every device initialization.
 			packer = struct.Struct('f'*19)
 			cell_count=0
 			for i in range(count_simCell, device.fpga_n_size):
-				tx += packer.pack(self.network[i].dend_V_dend, self.network[i].dend_Calcium_r,self.network[i].dend_Potassium_s,self.network[i].dend_Hcurrent_q,self.network[i].dend_Ca2Plus, self.network[i].dend_I_CaH, self.network[i].soma_g_CaL, self.network[i].soma_V_soma, self.network[i].soma_Sodium_m, self.network[i].soma_Sodium_h, self.network[i].soma_Potassium_n, self.network[i].soma_Potassium_p, self.network[i].soma_Potassium_x_s, self.network[i].soma_Calcium_k, self.network[i].soma_Calcium_l, self.network[i].axon_V_axon, self.network[i].axon_Sodium_m_a, self.network[i].axon_Sodium_h_a, self.network[i].axon_Potassium_x_a) #package of 19 float data of the init state
+				tx += packer.pack(self.network[i].dend_V_dend, self.network[i].dend_Calcium_r,self.network[i].dend_Potassium_s,self.network[i].dend_Hcurrent_q,self.network[i].dend_Ca2Plus, self.network[i].dend_I_CaH, self.network[i].soma_g_CaL, self.network[i].soma_V_soma, self.network[i].soma_Sodium_m, self.network[i].soma_Sodium_h, self.network[i].soma_Potassium_n, self.network[i].soma_Potassium_p, self.network[i].soma_Potassium_x_s, self.network[i].soma_Calcium_k, self.network[i].soma_Calcium_l, self.network[i].axon_V_axon, self.network[i].axon_Sodium_m_a, self.network[i].axon_Sodium_h_a, self.network[i].axon_Potassium_x_a) 
 
 			
 			tx_list.append(tx)
-			
-
 		count_simCell += device.fpga_n_size
 		threads = []
 		
 
-		for device in fpga_devices: #build threads#
+		for device in fpga_devices: #build threads to transfer data.
 			new_thread = data_transfer(device.Ip,device.port,tx_list[device.ID],state,device.fpga_n_size)
 			new_thread.start()
 			threads.append(new_thread)
 			
 
-		for t in threads: #join(threads)	
+		for t in threads: #waiting for threads	
 			t.join()
 		
 		
-
-	def gen_step(self, fpga_devices,finish) :
-		#print 'gen_step'
+######################################## STEP GENERATION SECTION #################################################
+	def gen_step(self, fpga_devices,finish) :	
 		vdend = []		
 		tx_list = []
 		count_simCell = 0
 		state=1
-		start = time.time()
+	
 		for device in fpga_devices: #generates messages for each device
 			tx=""
+			#package that contains the iapp for every cell in the device.
 			packer = struct.Struct('f')		
 			for i in range(count_simCell,count_simCell+device.fpga_n_size):
 				tx += packer.pack(self.network[i].iapp[self.stepCount])
+			#package that contains the vdend from cells in another devices.
 			if(self.size > device.fpga_n_size):
-				
-		
 				packer = struct.Struct('f')
 				vdend = self.vdend[:count_simCell]+self.vdend[count_simCell+device.fpga_n_size:]
 				
@@ -203,20 +193,26 @@ class simNetwork: #this class initialize the network from received file
 			
 			tx_list.append(tx)
 			count_simCell += device.fpga_n_size
-		start = time.time()
+		
+
+		#lines from time() library are for time execution measurement purposes. In this case, only data transfer time is measured.
+		start = time.time()	#get initial time value. 
+
 		threads = []
 		for device in fpga_devices: #build threads
 			new_thread=data_transfer(device.Ip,device.port,tx_list[device.ID],state,device.fpga_n_size)
 			new_thread.start()
 			threads.append(new_thread)
-		#print "join"	
-		for t in threads: #join(threads)	
+		
+	
+		for t in threads: #waiting for threads		
 			t.join()
 		
-		end= time.time()
-		ref=end-start
+		end= time.time()	#get final time value. 
+		ref=end-start		#get the time execution in seconds.
 		
-		self.accum+=ref
+		##Only for measurement purposes(average, maximun and minimun)
+		self.accum+=ref	
 		if self.MAX < ref:
 			self.MAX=ref
 		if self.MIN>ref:
@@ -226,6 +222,7 @@ class simNetwork: #this class initialize the network from received file
 		cellout_fpga = []
 		vdend_fpga = []
 		vdend_cont=0
+		#save the cellout(Vaxon) and Vdend.
 		for device in fpga_devices:
 			packer = struct.Struct('f'*device.fpga_n_size)
 			cellout_fpga = packer.unpack(threads[device.ID].rx[0:4*device.fpga_n_size])
@@ -236,7 +233,7 @@ class simNetwork: #this class initialize the network from received file
 			
 			
 		simNetwork.stepCount += 1
-		#print "gen_step", simNetwork.stepCount
+		print "gen_step", simNetwork.stepCount	#for test purposes
 		 		
 
 
@@ -250,6 +247,8 @@ class simNetwork: #this class initialize the network from received file
 			buff += '\n'
 		f.write(buff)
 		f.close()
+
+		#Only for measurement purposes.
 		PROM=self.accum/simNetwork.stepCount
 		print "PROMEDIO" , PROM , "MAX", self.MAX , "MIN", self.MIN
 		
@@ -273,18 +272,27 @@ else:
 
 
 
-NETWORK = simNetwork(N,STEP)
+NETWORK = simNetwork(N,STEP)		#It create the network.
 NETWORK.set_network("file/data.txt")
 
-NETWORK.hw_init(fpga_devices)
+NETWORK.hw_init(fpga_devices)		#It initialize the network.
 
-for s in range(STEP):
+for s in range(STEP):			#It generate the steps.
 	if s==(STEP-1):
 		NETWORK.gen_step(fpga_devices,True)
 	else:	
 		NETWORK.gen_step(fpga_devices,False)
 
 
-NETWORK.print_file("dataG.txt")
+NETWORK.print_file("dataG.txt")		#Save a file with the output.
 
+
+#******************************************************************************************************************
+#FILE NAME = ethernet.py
+#Written by: Kaleb Alfaro Badilla & Daniel Zamora Umaña.
+#This script was created to performs the communication between a Web Server and peripheral devices(Zedboards).
+#CREATED = 2016
+#LAST ACTUALIZATION = 2017
+#Python 2.7
+#******************************************************************************************************************
 
