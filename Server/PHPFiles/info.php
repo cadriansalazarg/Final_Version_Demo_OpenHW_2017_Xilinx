@@ -1,6 +1,6 @@
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : info.php
-#Written by: Daniel Zamora_Umaña.
+#Written by: Daniel Zamora-Umaña.
 #This code is a script to create a webpage. It was tested and run with Apache server.
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
@@ -96,7 +96,7 @@
 
 <!------------------------------------------------------------------------------------------------
 #FILE NAME : info.php
-#Written by: Daniel Zamora_Umaña.
+#Written by: Daniel Zamora-Umaña.
 #This code is a script to create a webpage. It was tested and run with Apache server.
 #CREATED : 2016
 #LAST ACTUALIZATION : 27/06/2017
