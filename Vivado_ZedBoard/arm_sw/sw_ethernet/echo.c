@@ -48,7 +48,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 /******************************************************************************
 * src/sdk/echo.c: The callback response generator
 *
-* Written by: Kaleb Alfaro and Ignacio Fernandez, 2017.
+* Modified by: Kaleb Alfaro-Badilla , 2017.
 *
 * This code establish the communication between server
 * script called ethernet.py.
@@ -68,7 +68,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 /* Important parameters and routines for initialization
  * of the hls_IP are located here*/
-#include "lib_xmmult_hw.h"
+#include "lib_xaccel_hw.h"
 
 
 /*The sequence of this program is:
@@ -128,9 +128,16 @@ int max_t = 0;
 float acc = 0;
 //*************************
 
+//Variables for flexible
+int io_n_size = IO_N_SIZE;
+int num_neigh_cell = NUM_NEIGH_CELLS; //Neighbors cells in FPGA
+int init_data_lenght = INIT_DATA_LENGHT;
+int step_data_lenght = STEP_DATA_LENGHT;
+int response_data_lenght = RESPONSE_DATA_LENGHT;
+
 /*Memory blocks for reception and sending data*/
 mod_prec iniState[INIT_DATA_LENGHT/4]; //Data structure for init-data received
-mod_prec iapp[N_SIZE_TEST]; //Data structure for iapp received
+mod_prec iapp[IO_N_SIZE]; //Data structure for iapp received
 mod_prec cellOut[RESPONSE_DATA_LENGHT/4]; //Data structure for axon and dendrite voltage data
 
 
@@ -242,7 +249,7 @@ int init_hw(){
 
 	/* Start init  */
 
-	for(i=0;i<INIT_DATA_LENGHT/4; i+=19){
+	for(i=0;i<init_data_lenght/4; i+=19){
 
     	XHls_accel_Write_local_state0_dend_V_dend_Words(&computenetwork, i/19,(int *) &iniState[i+dend_vdend], 1);
 		XHls_accel_Write_local_state0_dend_Hcurrent_q_Words(&computenetwork, i/19,(int *) &iniState[i+dend_hcurr], 1);
@@ -266,12 +273,12 @@ int init_hw(){
     }
 	data = 0.04;
 
-    for(i=0;i<N_SIZE_TEST; i++){
+    for(i=0;i<io_n_size; i++){
 		XHls_accel_Write_Connectivity_Matrix_Words(&computenetwork, i,(int *) &data, 1);
 	}
-	XHls_accel_Set_Mux_Factor(&computenetwork,NUM_NEIGH_CELLS);
-	XHls_accel_Set_N_Size(&computenetwork, N_SIZE_TEST);
-	//XHls_accel_Set_Conn_Matrix_Size(&computenetwork, N_SIZE_TEST);
+	XHls_accel_Set_Mux_Factor(&computenetwork,num_neigh_cell);
+	XHls_accel_Set_N_Size(&computenetwork, io_n_size);
+	//XHls_accel_Set_Conn_Matrix_Size(&computenetwork, io_n_size);
 
 
     return 0;
@@ -330,36 +337,51 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 	int i;
 
 	if(State_counter==INIT_CELLS){
-		/*Data is not completed by now*/
-		if(init_array_offset_counter<INIT_DATA_LENGHT){
-			/*Copy the data payload of the packet in memory*/
-			for(i=0; i < p->len; i+=4){
+		if(init_array_offset_counter<1){
+			*&io_n_size = *(int *)(p->payload+0);
+			*&num_neigh_cell = *(int *)(p->payload+4);
+			for(i=8; i < p->len; i+=4){
 				*(int *)&iniState[(i+init_array_offset_counter)/4]= *(int *)(p->payload+i);
 				//printf("%d\t%d\t%d\t%f\n",p->len,i,init_array_offset_counter,iniState[(i+init_array_offset_counter)/4]);
 			}
 			/*count how many bytes has been received*/
 			init_array_offset_counter += p->len;
+			init_array_offset_counter += -8;
 			pbuf_free(p);
+			/*update values*/
+			init_data_lenght = CELL_STRUCT_SIZE*num_neigh_cell*PRECISION_DATA_SIZE;
+			step_data_lenght = (io_n_size+1)*PRECISION_DATA_SIZE;
+			response_data_lenght = 2*num_neigh_cell*4;
+			//printf("Nsize:%d\tMux_factor:%d\n",io_n_size,num_neigh_cell);
+		}else{
+			/*Data is not completed by now*/
+			if(init_array_offset_counter<init_data_lenght){
+				/*Copy the data payload of the packet in memory*/
+				for(i=0; i < p->len; i+=4){
+					*(int *)&iniState[(i+init_array_offset_counter)/4]= *(int *)(p->payload+i);
+					//printf("%d\t%d\t%d\t%f\n",p->len,i,init_array_offset_counter,iniState[(i+init_array_offset_counter)/4]);
+				}
+				/*count how many bytes has been received*/
+				init_array_offset_counter += p->len;
+				pbuf_free(p);
+			}
+				/*If the data received is complete, start init of HW*/
+			if(init_array_offset_counter==init_data_lenght){
+				init_hw();
+				State_counter=COMPUTATION;
+				init_array_offset_counter=0;
+				print("ENDINIT");
+
+				/* in this case, we assume that the payload is < TCP_SND_BUF */
+				if (tcp_sndbuf(tpcb) > 4) {
+						err = tcp_write(tpcb, &first_reply, 4, 1); //reply finished flag
+				} else xil_printf("no space in tcp_sndbuf\n\r");
+			}
 		}
-			/*If the data received is complete, start init of HW*/
-		if(init_array_offset_counter==INIT_DATA_LENGHT){
-			init_hw();
-			State_counter=COMPUTATION;
-			init_array_offset_counter=0;
-			print("ENDINIT");
-
-			/* in this case, we assume that the payload is < TCP_SND_BUF */
-			if (tcp_sndbuf(tpcb) > 4) {
-					err = tcp_write(tpcb, &first_reply, 4, 1); //reply finished flag
-			} else
-				xil_printf("no space in tcp_sndbuf\n\r");
-
-		}
-
 	}else{
 		if(State_counter==COMPUTATION){
 			// If computation data is not complete yet
-			if(iapp_array_offset_counter<STEP_DATA_LENGHT){
+			if(iapp_array_offset_counter<step_data_lenght){
 				for(i=0; i < p->len; i+=4){
 					*(int *)&iapp[(i+iapp_array_offset_counter)/4]= *(int *)(p->payload+i);
 			//		printf("%d\t%d\t%d\t%f\n",p->len,i,iapp_array_offset_counter,iapp[(i+iapp_array_offset_counter)/4]);
@@ -374,7 +396,7 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 			}
 			//printf("%d\t%d\t%d\t%f\n",p->len,i,iapp_array_offset_counter,iapp[100]);
 			//If data is complete, Compute Network
-			if(iapp_array_offset_counter==STEP_DATA_LENGHT){
+			if(iapp_array_offset_counter==step_data_lenght){
 
 				/*If the stop flag is received*/
 
@@ -386,8 +408,8 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 				ComputeNetwork();
 				iapp_array_offset_counter=0;
 				//printf("REPLYING\t%f\t%f\n",cellOut[0],cellOut[999]);
-				if (tcp_sndbuf(tpcb) > RESPONSE_DATA_LENGHT) {
-					err = tcp_write(tpcb, cellOut, RESPONSE_DATA_LENGHT, 1);
+				if (tcp_sndbuf(tpcb) > response_data_lenght) {
+					err = tcp_write(tpcb, cellOut, response_data_lenght, 1);
 				} else
 					print("no space in tcp_sndbuf\n\r");
 			}
@@ -458,3 +480,14 @@ int start_application()
 
 	return 0;
 }
+
+/******************************************************************************
+* src/sdk/echo.c: The callback response generator
+*
+* Modified by: Kaleb Alfaro-Badilla , 2017.
+*
+* This code establish the communication between server
+* script called ethernet.py.
+*
+******************************************************************************/
+
