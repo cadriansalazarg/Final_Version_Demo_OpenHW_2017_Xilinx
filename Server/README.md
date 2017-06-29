@@ -22,21 +22,23 @@ To build the website, several steps have to be executed:
 1. Install Apache2 server. 
 2. Install PHP 5 or later.
 3. Create a directory that will hold the website. In Ubuntu, create the directory like this _/var/www/zedbrain.com/public___html_.
-4. Give extra permissions to the general web directory. In Ubuntu, type **sudo chmod -R 755 /var/www**.
-5. Make a copy to the file in _/etc/apache2/sites-available/000-default.conf_ and change the name by **zedbrain.com.conf**.
-6. Add several directives in this file like ServerName **zedbrain.com**, ServerAlias **www.zedbrain.com** and DocumentRoot _/var/www/zedbrain.com/public___html_.
-7. Enable the website typing **sudo a2ensite zedbrain.com.conf**.
-8. Disable the default site typing **sudo a2dissite 000-default.conf**.
-9. Restart Apache to make these changes take effect typing **sudo service apache2 restart**.
-10. Move php files and python files to the directory _zedbrain.com/public___html_.
-11. Create extra directory called **css** and move the CSS files in there.
-12. Create extra directory called **images** in public_html directory and put all the images.tar files in there. 
-13. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
-14. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
-15. Give to _public___html_ directory and _file_ directory extra permissions by clicking in properties/permissions/others access/create and delete files.
-16. To make the website more flexible, open the file in the route _/etc/php5/apache2_ and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**.
-17. Test the website by using to Firefox web browser and typing localhost.
-
+4. Give extra permissions to the general web directory. In Ubuntu, type **sudo chmod -R 755 /var/www**
+5. Give edit permissions to be able to modify files in your web directory **sudo chown -R $USER:$USER /var/www/zedbrain.com/public_html**
+6. Make a copy to the file in _/etc/apache2/sites-available/000-default.conf_ and change the name by **zedbrain.com.conf**
+7. Add several directives in this file like ServerName **zedbrain.com**, ServerAlias **www.zedbrain.com** and DocumentRoot _/var/www/zedbrain.com/public___html_.
+8. Enable the website typing **sudo a2ensite zedbrain.com.conf**
+9. Disable the default site typing **sudo a2dissite 000-default.conf**
+10. Restart Apache to make these changes take effect typing **sudo service apache2 restart**
+11. Move php files and python files to the directory _zedbrain.com/public___html_.
+12. Create extra directory called **css** and move the CSS files in there.
+13. Create extra directory called **images** in public_html directory and put all the images.tar files in there. 
+14. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
+15. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
+16. Give to _public___html_ directory and _file_ directory extra permissions by clicking in properties/permissions/others access/create and delete files.
+17. To make the website more flexible, open the file in the route _/etc/php5/apache2_ and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**
+18. Test the website by using to Firefox web browser and typing localhost.
+19. To create a new simulation, create the network stimulus running the script **std_stimulus_gen.py**. Edit this script according network size and the simulation steps that you need.
+20. Upload the stimulus file and run a simulation to get results and see them in the website. 
 
 To test the website, it was used Ubuntu 15.04, Apache2, Python 2.7, Firefox 44.0 and PHP5.
 
