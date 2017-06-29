@@ -12,6 +12,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 
 ## Instructions (Last revision: 6-28-2017)
 
+All of these files are used to test the correct functionallity of the design. Ethernet is not included hear. It is the best case to test the system.
 
 In order to loaded the SDK software
 

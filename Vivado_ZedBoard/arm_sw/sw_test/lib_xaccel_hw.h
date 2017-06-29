@@ -24,7 +24,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #* Modified by : Carlos Salazar-García, 2017
 #* This source code is the kernel of the algorithm
 #* 
-#*
+#* Instruction: The maximum value for IO_N_SIZE is 8000, The maximum value for TIME_MUX_FACTOR is 2000, TIME_MUX_FACTOR < IO_N_SIZE
+#* For 4000<=IO_N_SIZE<= 8000 open file lscript.ld and you must put Stack and Heap Size in 0x7000, when TIME_MUX_FACTOR = 2000, other values requieres differents values of Heap and Stack Size.
 #******************************************************************************/
 
 #ifndef H_LIB_EXAMPLE_HW_H
@@ -32,13 +33,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #include "xhls_accel.h"
 
-#define TIME_MUX_FACTOR 50
-#define IO_N_SIZE 100
+#define TIME_MUX_FACTOR 2000 // it represents the number of  local cells executing in a ZedBoard
+#define IO_N_SIZE 8000 // it represents the total number of cell running in N ZedBoards, it must be greater than TIME_MUX_FACTOR
 #define NUM_NEIG_CELLS IO_N_SIZE - TIME_MUX_FACTOR
 
 #define PRINTFAST 1 // This variable must be uncommented  if you want to print faster, highly recommendly
 
-#define SIM_STEP_TEST 5
+#define SIM_STEP_TEST 10
 
 
 int Setup_HW_Accelerator(float*,  float*, int);

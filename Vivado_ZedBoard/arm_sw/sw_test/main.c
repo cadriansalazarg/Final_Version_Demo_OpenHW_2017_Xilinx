@@ -24,7 +24,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #* Modified by : Carlos Salazar-García, 2017
 #* This source code is the kernel of the algorithm
 #* 
-#*
+#* This is a test to simulate in a ZedBoard. It simulates the algorithm without using Ethernet and nor other ZedBoards. The idea of that it demonstrates
+#* the correct functionally of a ZedBoard. In this case, the ZedBoard believes that it is working together with other ZedBoards.
+#* This software is used to test all the functionality of the system.
 #******************************************************************************/
 
 #include <stdio.h>
@@ -121,7 +123,7 @@ int main(int argc, char **argv)
 
 	xil_printf("***************************************************************\r");
 	xil_printf("  COMPUTE NETWORK -> AXI DMA -> ARM ACP                   \r");
-	xil_printf("  DESIGNED WITH  Vivado + HLS + IP Integrator 2016.3 \r");
+	xil_printf("  DESIGNED WITH  Vivado + HLS + IP Integrator 2016.4 \r");
 	xil_printf("***************************************************************\r");
 
 	/* ******************************************************************************* */
