@@ -400,7 +400,7 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 
 				/*If the stop flag is received*/
 
-				if(*(int *)&iapp[N_SIZE_TEST]==STOP_FLAG){
+				if(*(int *)&iapp[io_n_size]==STOP_FLAG){
 					State_counter=INIT_CELLS;
 					printf("RESET\nMin time: %d\tMax time:%d\tAvrg: %f\n",min_t,max_t,acc/(SIM_STEP_TEST*100000));
 					acc = 0;
