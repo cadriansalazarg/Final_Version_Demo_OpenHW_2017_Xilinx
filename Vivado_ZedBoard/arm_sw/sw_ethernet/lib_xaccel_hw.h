@@ -42,13 +42,13 @@ typedef float mod_prec;
 //Simulation parameters
 //#define N_SIZE_TEST 100	//Simulation total
 #define IO_N_SIZE 3000
-#define NUM_NEIGH_CELLS 1000 //Neighbors cells in FPGA
+#define TIME_MUX_FACTOR 1000 //Neighbors cells in FPGA
 #define STOP_FLAG 0xFFFFFFFF//Stop simulation flag
 #define CELL_STRUCT_SIZE 19
 #define PRECISION_DATA_SIZE 4
-#define INIT_DATA_LENGHT CELL_STRUCT_SIZE*NUM_NEIGH_CELLS*PRECISION_DATA_SIZE
+#define INIT_DATA_LENGHT CELL_STRUCT_SIZE*TIME_MUX_FACTOR*PRECISION_DATA_SIZE
 #define STEP_DATA_LENGHT (IO_N_SIZE+1)*PRECISION_DATA_SIZE //Including Flag
-#define RESPONSE_DATA_LENGHT 2*NUM_NEIGH_CELLS*4
+#define RESPONSE_DATA_LENGHT 2*TIME_MUX_FACTOR*4
 #define CONTINUE_FLAG 0xFFFF0000
 #define STOP_FLAG 0xFFFFFFFF
 
@@ -59,7 +59,6 @@ typedef float mod_prec;
 
 //
 
-//#define TIME_MUX_FACTOR 50
 //#define IO_N_SIZE 100
 //#define NUM_NEIG_CELLS IO_N_SIZE - TIME_MUX_FACTOR
 

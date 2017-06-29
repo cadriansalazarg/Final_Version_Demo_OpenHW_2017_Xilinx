@@ -130,7 +130,7 @@ float acc = 0;
 
 //Variables for flexible
 int io_n_size = IO_N_SIZE;
-int num_neigh_cell = NUM_NEIGH_CELLS; //Neighbors cells in FPGA
+int time_mux = TIME_MUX_FACTOR; //Neighbors cells in FPGA
 int init_data_lenght = INIT_DATA_LENGHT;
 int step_data_lenght = STEP_DATA_LENGHT;
 int response_data_lenght = RESPONSE_DATA_LENGHT;
@@ -276,7 +276,7 @@ int init_hw(){
     for(i=0;i<io_n_size; i++){
 		XHls_accel_Write_Connectivity_Matrix_Words(&computenetwork, i,(int *) &data, 1);
 	}
-	XHls_accel_Set_Mux_Factor(&computenetwork,num_neigh_cell);
+	XHls_accel_Set_Mux_Factor(&computenetwork,time_mux);
 	XHls_accel_Set_N_Size(&computenetwork, io_n_size);
 	//XHls_accel_Set_Conn_Matrix_Size(&computenetwork, io_n_size);
 
@@ -339,7 +339,7 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 	if(State_counter==INIT_CELLS){
 		if(init_array_offset_counter<1){
 			*&io_n_size = *(int *)(p->payload+0);
-			*&num_neigh_cell = *(int *)(p->payload+4);
+			*&time_mux = *(int *)(p->payload+4);
 			for(i=8; i < p->len; i+=4){
 				*(int *)&iniState[(i+init_array_offset_counter)/4]= *(int *)(p->payload+i);
 				//printf("%d\t%d\t%d\t%f\n",p->len,i,init_array_offset_counter,iniState[(i+init_array_offset_counter)/4]);
@@ -349,10 +349,10 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 			init_array_offset_counter += -8;
 			pbuf_free(p);
 			/*update values*/
-			init_data_lenght = CELL_STRUCT_SIZE*num_neigh_cell*PRECISION_DATA_SIZE;
+			init_data_lenght = CELL_STRUCT_SIZE*time_mux*PRECISION_DATA_SIZE;
 			step_data_lenght = (io_n_size+1)*PRECISION_DATA_SIZE;
-			response_data_lenght = 2*num_neigh_cell*4;
-			//printf("Nsize:%d\tMux_factor:%d\n",io_n_size,num_neigh_cell);
+			response_data_lenght = 2*time_mux*4;
+			//printf("Nsize:%d\tMux_factor:%d\n",io_n_size,time_mux);
 		}else{
 			/*Data is not completed by now*/
 			if(init_array_offset_counter<init_data_lenght){
