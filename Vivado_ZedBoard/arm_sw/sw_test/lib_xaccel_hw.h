@@ -37,9 +37,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #define IO_N_SIZE 8000 // it represents the total number of cell running in N ZedBoards, it must be greater than TIME_MUX_FACTOR
 #define NUM_NEIG_CELLS IO_N_SIZE - TIME_MUX_FACTOR
 
-#define PRINTFAST 1 // This variable must be uncommented  if you want to print faster, highly recommendly
+#define PRINTFAST 1 // This variable must be uncommented  if you want to print faster, highly recommended
 
-#define SIM_STEP_TEST 10
+#define SIM_STEP_TEST 10 //Number of step to be simulated
 
 
 int Setup_HW_Accelerator(float*,  float*, int);

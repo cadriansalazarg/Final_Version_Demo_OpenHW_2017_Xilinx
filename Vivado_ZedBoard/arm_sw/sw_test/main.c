@@ -270,14 +270,14 @@ int main(int argc, char **argv)
 			printf("Vd  %d: %f,\t Vd  %d: %f,\t Vd  %d: %f,\t Vd  %d: %f\n", 0, cellOut[TIME_MUX_FACTOR+2], 1, cellOut[TIME_MUX_FACTOR+2+1], TIME_MUX_FACTOR-2, cellOut[TIME_MUX_FACTOR+TIME_MUX_FACTOR-2],TIME_MUX_FACTOR-1, cellOut[TIME_MUX_FACTOR+TIME_MUX_FACTOR-1]);
 		#else
 
-		    for(j=0; j<IO_N_SIZE; j++){
+		    for(j=0; j<TIME_MUX_FACTOR+TIME_MUX_FACTOR-1; j++){
 		    	if(j<TIME_MUX_FACTOR)
 		    		printf("Va %d: %f\t", j+1, cellOut[j]);
 		    	else
 		    		printf("Vd %d: %f\t", j+1-TIME_MUX_FACTOR, cellOut[j]);
 		    }
 
-		    printf("Vd %d: %f\n", IO_N_SIZE, cellOut[IO_N_SIZE-1]);
+		    printf("Vd %d: %f\n", TIME_MUX_FACTOR, cellOut[TIME_MUX_FACTOR+TIME_MUX_FACTOR-1]);
 
 		#endif
     	
