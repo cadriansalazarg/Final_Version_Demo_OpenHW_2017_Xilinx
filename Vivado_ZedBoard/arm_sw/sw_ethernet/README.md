@@ -18,11 +18,12 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 	- echo.c
 	- main.c
 4. Add the following files:
-	- dma_main.c
-	- lib_xmmult_hw.c
-	- lib_xmmult_hw.h
+	- dma_main.c (optional, used only for testing purposes)
+	- lib_xaccel_hw.c
+	- lib_xaccel_hw.h
 5. Modify BSP by changing the parameter of lwIP
 	- "tcp_send_buff" to 32MB
+	- DHCP to false
 6. Build project
 
 ## Directory structure
