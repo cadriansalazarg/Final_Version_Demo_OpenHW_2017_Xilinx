@@ -149,8 +149,8 @@ class simNetwork: #this class initialize the network from received file
 		for device in fpga_devices: #generates messages for each device
 			tx=""	
 			#package that contains the N size for every device.
-			packer = struct.Struct('i')
-			tx += packer.pack(device.fpga_n_size)
+			packer = struct.Struct('i'*2)
+			tx += packer.pack(self.size,device.fpga_n_size)
 			#package of 19 float data of the init state for every device initialization.
 			packer = struct.Struct('f'*19)
 			cell_count=0

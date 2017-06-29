@@ -68,7 +68,7 @@ cbar = plt.colorbar()	#the sidebar is placed in the figure
 #it is added a title label and axis labels to the figure.
 cbar.set_label('Axon output voltage')
 if (graph==0):
-d 	plt.title('No Response')
+ 	plt.title('No Response')
 else:
 	plt.title('Raster plot of axon responses for neuron population')
 plt.xlabel('Neuron enumeration')
