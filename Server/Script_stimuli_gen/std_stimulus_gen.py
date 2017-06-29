@@ -8,14 +8,14 @@
 
 #******************************************************************************************************************
 #FILE NAME = std_stimulus_gen.py
-#Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umaña.
+#Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umana.
 #This script generate and standard initialization for the network with a fixed Nsize and number of steps.
 #CREATED = 2016
 #LAST ACTUALIZATION = 27/06/2017
 #Python 2.7
 #******************************************************************************************************************
 
-n_size=100	#This variable creates 'n_size' cells, this number is the total network size to simulate. 
+n_size=10	#This variable creates 'n_size' cells, this number is the total network size to simulate. 
 m=0
 acum=0
 steps=50000	#Number of step that you want to create.
@@ -36,9 +36,9 @@ for line in archivo.readlines():
 			else:
 				f = open("data.txt","a+") 
 			f.write(varstr)
-			print(varstr)
+			
 			f.write('\t') 
-			for b in range(0,n):		#write in the file data.txt the initialization for every cell.
+			for b in range(0,n_size):		#write in the file data.txt the initialization for every cell.
 				f.write(acum)
 				f.write('\t') 
 			f.write('\n')
@@ -47,33 +47,33 @@ archivo.close() 			#close file
 
 f = open("data.txt","a+")
 line=f.readlines()
-for i in range(0,rep):
+for i in range(0,steps):
 	acum = str(i)+':'
 	if (i>=init and i<=fin):	# write the steps for every cell in the network. The stimulus change for the middle of the network
-		for b in range(0,n):	
-			if(b>n/2):
+		for b in range(0,n_size):	
+			if(b>n_size/2):
 				acum+= '\t'+'6'
 			else:
 				acum+= '\t'+'0'
 		acum+='\n'
 		f.write(acum)
 	elif(i>=init+5000 and i<=fin+5000):	# write the steps for every cell in the network. The stimulus change for the half of the network.
-		for b in range(0,n):
-			if(b>n/2):
+		for b in range(0,n_size):
+			if(b>n_size/2):
 				acum+= '\t'+'0'
 			else:
 				acum+= '\t'+'6'
 		acum+='\n'
 		f.write(acum)
 	else:
-		for b in range(0,n):		#up the final step with stimulation, the rest of the steps has stimulus 0.
+		for b in range(0,n_size):		#up the final step with stimulation, the rest of the steps has stimulus 0.
 				acum+= '\t'+'0'
 		acum+='\n'
 		f.write(acum) 
 f.close()
 #******************************************************************************************************************
 #FILE NAME = std_stimulus_gen.py
-#Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umaña.
+#Written by: Kaleb Alfaro-Badilla & Daniel Zamora-Umana.
 #This script generate and standard initialization for the network with a fixed Nsize and number of steps.
 #CREATED = 2016
 #LAST ACTUALIZATION = 27/06/2017
