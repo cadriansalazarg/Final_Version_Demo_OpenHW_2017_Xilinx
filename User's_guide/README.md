@@ -20,6 +20,13 @@ https://www.youtube.com/watch?v=rir-TC24CDY&feature=youtu.be
 You must follow step-by-step these instructions in order to verify the functionality of the system.
 
 
+All the instructions step-by-step to elaborate the web page can be visualized in the following video:
+
+https://www.youtube.com/watch?v=_sOWxxq7FVw&feature=youtu.be
+
+You must follow step-by-step these instructions in order to verify the functionality of the system.
+
+
 ## Collaborators
 
 PhD Students: Georgios Smaragdos, Carlos Salazar-Garcia
