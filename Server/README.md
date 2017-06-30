@@ -35,7 +35,7 @@ To build the website, several steps have to be executed:
 14. Create extra directory called **file** in public_html directory. This directory is used to upload the stimulation file.
 15. Create new files called **dataG.txt** and  **dataG1.txt** in public_html directory and give them write permissions by clicking in properties/permissions/others access/read and write.
 16. Give to _public___html_ directory and _file_ directory extra permissions by clicking in properties/permissions/others access/create and delete files.
-17. To make the website more flexible, open the file in the route _/etc/php5/apache2_ and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**
+17. To make the website more flexible, open the file **php.ini** in the route _/etc/php5/apache2/php.ini_ and increase the size of variables like **post_max_size**, **upload_max_filesize** and **memory_limit**
 18. Test the website by using to Firefox web browser and typing localhost.
 19. To create a new simulation, create the network stimulus running the script **std_stimulus_gen.py**. Edit this script according network size and the simulation steps that you need.
 20. Upload the stimulus file and run a simulation to get results and see them in the website. 
