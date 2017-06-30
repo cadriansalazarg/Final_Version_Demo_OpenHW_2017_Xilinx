@@ -2,7 +2,7 @@
 # A research application from the Erasmus Brain project at Erasmus Medical Center (Erasmus MC) Neuroscience Department 
 # Site: http://www.erasmusbrainproject.com/
 
-# Collaborating institutions: Tecnologico de Costa Rica (TEC)
+# Collaborating institutions: Tecnologico de Costa Rica (TEC), Vineyard EU project
 
 **Simulate brain cells using complex biologically accurate models, with the power of multiple ZedBoards**
 
@@ -11,11 +11,11 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
 ## Directory structure
-hls/ ------------ All files to generate the hardware accelerator using Vivado HLS 2016.4
+hls/ ------------ Source and constraints files used to generate the hardware accelerator ION IP. Vivado ver. HLS 2016.4
 
-vivado/          ------------ A script tcl to generate all the vivado project. Script was tested in Vivado 2016.4
+vivado/          ------------ TCL script used to generate all the ZedBoard project. Script was tested using Vivado 2016.4
 
-arw_sw/  ----------- All software used in the Vivado SDK 2016.4
+arm_sw/  ----------- Software needed by the ZedBoard's Zynq core in order to run ZedBrain. Software implemented with the Vivado SDK 2016.4 edition.
 
 ## Collaborators
 

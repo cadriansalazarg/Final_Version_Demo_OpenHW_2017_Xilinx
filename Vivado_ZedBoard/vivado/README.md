@@ -16,7 +16,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 
 ## Instructions (Last revision: 6-28-2017)
 
-In order to get the Zedbrain platform running on the Zedboard:
+In order to get the ZedBrain platform running on the Zedboard:
 
 1. Create a Vivado project
 2. Load the generated IP with the accelerated hardware to be connected

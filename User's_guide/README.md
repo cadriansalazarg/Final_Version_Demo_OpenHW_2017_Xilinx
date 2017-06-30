@@ -2,7 +2,7 @@
 # A research application from the Erasmus Brain project at Erasmus Medical Center (Erasmus MC) Neuroscience Department 
 # Site: http://www.erasmusbrainproject.com/
 
-# Collaborating institutions: Tecnologico de Costa Rica (TEC)
+# Collaborating institutions: Tecnologico de Costa Rica (TEC), Vineyard EU Project
 
 **Simulate brain cells using complex biologically accurate models, with the power of multiple ZedBoards**
 
@@ -10,21 +10,20 @@ ZedBrain is an open hardware demo that shows the capabilities of using the Zedbo
 
 Computing intensive models such as the Hodgkin-Huxley's can be implemented on C or C++ and synthesized on the PL fabric of the Zynq platform for high speed performance. Multiple Zedboards connected through the TCP-IP protocol can extend simulations to networks with thousands of cells, with quick, accurate results.
 
-## Instructions to use the system.
+## General instructions for using the ZedBrain system.
 
 
-All the instructions step-by-step to create the project in Vivado 2016.4 can be visualized in the following video:
+The instructions on how to create step-by-step the ZedBrain project in a ZedBoard, using  Vivado 2016.4, can be watched in the following video:
 
 https://www.youtube.com/watch?v=rir-TC24CDY&feature=youtu.be
 
-You must follow step-by-step these instructions in order to verify the functionality of the system.
+You must follow these instructions step-by-step  in order to verify the functionality of the system.
 
 
-All the instructions step-by-step to elaborate the web page can be visualized in the following video:
+The instructions on  how to elaborate the website needed to handle the ZedBrain system can be watched in the following video:
 
 https://www.youtube.com/watch?v=_sOWxxq7FVw&feature=youtu.be
 
-You must follow step-by-step these instructions in order to verify the functionality of the system.
 
 
 ## Collaborators

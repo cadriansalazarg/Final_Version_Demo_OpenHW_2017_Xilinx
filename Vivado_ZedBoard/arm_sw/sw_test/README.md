@@ -12,19 +12,19 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 
 ## Instructions (Last revision: 6-28-2017)
 
-All of these files are used to test the correct functionallity of the design. Ethernet is not included hear. It is the best case to test the system.
+All of these files are needed to test the correct functionallity of the design. Ethernet drivers are not included in this test version.
 
-In order to loaded the SDK software
+In order to load the SDK software:
 
 1. Open the SDK from Vivado
-2. Create a new project using  Hello World template
+2. Create a new project using the Hello World template
 3. Delete the file main.c
-4. Import the files lib_xmmult_hw.c,  lib_xmmult_hw.h,  main.c located in this folder to the SDK project
-5. Modify in the  lib_xmmult_hw.h all the parameters of the network tht you want change.
+4. Import the files "lib_xmmult_hw.c",  "lib_xmmult_hw.h" and "main.c" located in this folder to the SDK project
+5.  In "lib_xmmult_hw.h" modify all the parameters of the network that you want to adjust.
 6. Click-on the SDK Terminal
 7. Add the UART port
-8. Modify the size of the stack and heap in function of the number of neurons.
-9. Run the apllication
+8. Modify the size of the stack and heap as required by the maximum number of neurons you want to simulate.
+9. Run the application
 
 
 ## Collaborators

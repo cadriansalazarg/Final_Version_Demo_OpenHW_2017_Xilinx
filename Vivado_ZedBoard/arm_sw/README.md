@@ -14,7 +14,7 @@ Computing intensive models such as the Hodgkin-Huxley's can be implemented on C 
 
 sw_ethernet/ ------------ This folder contains all the files used for the final version of the demo
 
-sw_test/  -----------  This folder contains all the files to test the application using a ZedBoard.
+sw_test/  -----------  This folder contains all the files needed to test the application using a ZedBoard.
 
 ## Collaborators
 
